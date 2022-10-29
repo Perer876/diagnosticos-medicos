@@ -9,8 +9,12 @@ class PruebaLaboratorio extends Model
 {
     use HasFactory;
 
+    protected $table = 'pruebas_laboratorio';
+
+    protected $guarded = [];
+
     public function enfermedades()
     {
-        return $this->hasMany(Cita::class);
+        return $this->hasMany(Enfermedad::class);
     }
 }

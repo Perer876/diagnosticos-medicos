@@ -9,6 +9,10 @@ class Sintoma extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
+    public $timestamps = false;
+
     public function evaluaciones()
     {
         return $this->belongsToMany(Evaluacion::class);

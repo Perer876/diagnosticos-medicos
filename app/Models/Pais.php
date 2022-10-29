@@ -9,6 +9,12 @@ class Pais extends Model
 {
     use HasFactory;
 
+    protected $table = 'paises';
+
+    protected $guarded = [];
+
+    public $timestamps = false;
+
     public function estados()
     {
         return $this->hasMany(Estado::class);

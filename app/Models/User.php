@@ -50,11 +50,21 @@ class User extends Authenticatable
 
     public function rol()
     {
-        $this->hasOne(Rol::class);
+        return $this->belongsTo(Rol::class);
     }
 
     public function identificacion()
     {
-        $this->hasOne(Identificacion::class);
+        return $this->belongsTo(Identificacion::class);
+    }
+
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class);
+    }
+
+    public function medico()
+    {
+        return $this->hasOne(Medico::class);
     }
 }

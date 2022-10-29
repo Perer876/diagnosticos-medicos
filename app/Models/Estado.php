@@ -9,6 +9,10 @@ class Estado extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
+    public $timestamps = false;
+
     public function pais()
     {
         return $this->belongsTo(Pais::class);

@@ -9,6 +9,8 @@ class Cita extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function medico()
     {
         return $this->belongsTo(Medico::class);
@@ -22,5 +24,10 @@ class Cita extends Model
     public function evaluaciones()
     {
         return $this->hasMany(Evaluacion::class);
+    }
+
+    public function estado()
+    {
+        return $this->belongsTo(EstadoCita::class, 'estado_cita_id');
     }
 }

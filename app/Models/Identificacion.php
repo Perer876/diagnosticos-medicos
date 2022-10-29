@@ -23,4 +23,14 @@ class Identificacion extends Model
                 $attributes['nombres'] . $attributes['apellido_paterno'] . $attributes['apellido_materno']
         );
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
+    public function paciente()
+    {
+        return $this->hasOne(Paciente::class);
+    }
 }
