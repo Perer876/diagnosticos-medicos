@@ -1,11 +1,13 @@
 <x-guest-layout>
-
-    <div id="auth-left">
+    <div class="position-absolute m-3">
+        <x-theme-toggle />
+    </div>
+    <div id="auth-left" class="">
         <div class="auth-logo mb-5">
-            <a href="index.html"><img src="{{ asset('/images/logo/logo.png') }}" alt="Logo"></a>
+            <x-logo class="rounded mx-auto d-block w-25 h-25" />
         </div>
-        <h2 class="auth-title fs-2">Inicio de sesión.</h2>
-        <p class="auth-subtitle fs-6 mb-4">Ingresa con tus credenciales.</p>
+        <h2 class="auth-title text-center fs-2">Inicio de sesión</h2>
+        <p class="auth-subtitle text-center fs-6 mb-4">Ingresa con tus credenciales</p>
 
         @if (session('status'))
         <div class="mb-4 font-medium text-sm text-green-600">
@@ -23,18 +25,18 @@
                 <input class="form-control" type="text" name="alias" placeholder="Alias"
                     value="{{ old('alias') }}">
                 <div class="form-control-icon">
-                    <i class="bi bi-person"></i>
+                    <i class="bi bi-person lh-sm"></i>
                 </div>
             </div>
             <div class="form-group position-relative has-icon-left mb-4">
                 <input type="password" class="form-control" name="password" placeholder="Contraseña">
                 <div class="form-control-icon">
-                    <i class="bi bi-shield-lock"></i>
+                    <i class="bi bi-shield-lock lh-sm"></i>
                 </div>
             </div>
-            <div class="form-check d-flex align-items-end">
-                <input class="form-check-input me-2" type="checkbox" name="remember" id="flexCheckDefault">
-                <label class="form-check-label text-gray-600" for="flexCheckDefault">
+            <div class="form-check">
+                <input class="form-check-input me-2" type="checkbox" name="remember" id="checkKeepSession">
+                <label class="form-check-label text-gray-600 user-select-none" for="checkKeepSession">
                     Mantener sesión activa
                 </label>
             </div>
@@ -42,10 +44,11 @@
         </form>
         <div class="text-center mt-5 text-lg fs-4">
             @if (Route::has('register'))
-            <p class="text-gray-600">Don't have an account? <a href="{{route('register')}}" class="font-bold">Sign
-                    up</a>.</p>
+            <p class="text-gray-600">
+                Don't have an account?
+                <a href="{{route('register')}}" class="font-bold">Sign up</a>.
+            </p>
             @endif
-
 
             @if (Route::has('password.request'))
             <p><a class="font-bold" href="{{route('password.request')}}">Forgot password?</a>.</p>

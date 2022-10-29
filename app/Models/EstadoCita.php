@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rol extends Model
+class EstadoCita extends Model
 {
     use HasFactory;
 
-    protected $table = 'roles';
+    protected $table = 'estados_cita';
 
-    protected $fillable = ['name'];
+    protected $guarded = [];
 
     public $timestamps = false;
 
-    public function users()
+    protected function citas()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Cita::class, 'estado_cita_id');
     }
 }

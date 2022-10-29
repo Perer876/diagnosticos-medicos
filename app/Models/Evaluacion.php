@@ -9,6 +9,12 @@ class Evaluacion extends Model
 {
     use HasFactory;
 
+    protected $table = 'evaluaciones';
+
+    protected $guarded = [];
+
+    public $timestamps = false;
+
     public function cita()
     {
         return $this->belongsTo(Cita::class);

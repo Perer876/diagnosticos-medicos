@@ -9,6 +9,10 @@ class Enfermedad extends Model
 {
     use HasFactory;
 
+    protected $table = 'enfermedades';
+
+    protected $guarded = [];
+
     public function signos()
     {
         return $this->belongsToMany(Signo::class);

@@ -5,14 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tratamiento extends Model
+class Especialidad extends Model
 {
     use HasFactory;
 
+    protected $table = 'especialidades';
+
     protected $guarded = [];
 
-    public function enfermedades()
+    public $timestamps = false;
+
+    public function medicos()
     {
-        return $this->hasMany(Cita::class);
+        return $this->hasMany(Medico::class);
     }
 }
