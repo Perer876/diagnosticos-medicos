@@ -20,7 +20,7 @@ class Identificacion extends Model
     {
         return Attribute::make(
             get: fn ($value, $attributes) =>
-                $attributes['nombres'] . $attributes['apellido_paterno'] . $attributes['apellido_materno']
+                $attributes['nombres'] . ' ' . $attributes['apellido_paterno'] . ' ' . $attributes['apellido_materno']
         );
     }
 

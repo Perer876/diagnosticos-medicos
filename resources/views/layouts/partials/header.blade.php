@@ -4,7 +4,6 @@
             <a href="#" class="burger-btn d-block">
                 <i class="bi bi-justify fs-3"></i>
             </a>
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -12,28 +11,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown me-1">
-                        <a class="nav-link active dropdown-toggle" href="#" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            <i class='bi bi-envelope bi-sub fs-4 text-gray-600'></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                            <li>
-                                <h6 class="dropdown-header">Mail</h6>
-                            </li>
-                            <li><a class="dropdown-item" href="#">No new mail</a></li>
-                        </ul>
-                    </li>
                     <li class="nav-item dropdown me-3">
                         <a class="nav-link active dropdown-toggle" href="#" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             <i class='bi bi-bell bi-sub fs-4 text-gray-600'></i>
+{{--                            <span class="position-absolute top-25 start-75 translate-middle badge rounded-pill bg-danger">--}}
+{{--                                1--}}
+{{--                                <span class="visually-hidden">unread messages</span>--}}
+{{--                            </span>--}}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                             <li>
-                                <h6 class="dropdown-header">Notifications</h6>
+                                <h6 class="dropdown-header">Notificaciones</h6>
                             </li>
-                            <li><a class="dropdown-item">No notification available</a></li>
+                            <li>
+                                <a class="dropdown-item">No hay notificaciones</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
