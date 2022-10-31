@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Identificacion;
 use App\Models\Rol;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -48,8 +49,11 @@ class UserController extends Controller
     {
         DB::transaction(function () use($request) {
             $identificacion = Identificacion::create(
-                $request->safe()->only(['nombres', 'apellido_paterno', 'apellido_materno']
-                ));
+                array_map(
+                    fn ($valor) => ucwords($valor),
+                    $request->safe()->only(['nombres', 'apellido_paterno', 'apellido_materno'])
+                )
+            );
 
             User::create([
                 ...$request->safe()->only(['alias', 'rol_id']),
@@ -57,6 +61,7 @@ class UserController extends Controller
                 'identificacion_id' => $identificacion->id,
             ]);
         });
+
         return redirect()->route('users.index');
     }
 
@@ -88,22 +93,41 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param UpdateUserRequest $request
-     * @param User $user
-     * @return Response
+     * @param int $user
+     * @return RedirectResponse
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, int $user)
     {
-        //
+        $userData = $request->safe()->only(['alias', 'rol_id']);
+        if ($request->input('password') !== null) {
+            $userData['password'] = Hash::make($request->input('password'));
+        }
+
+        User::where('id', $user)->update($userData);
+
+        Identificacion::whereRelation('user', 'id', $user)->update(
+            array_map(
+                fn ($valor) => ucwords($valor),
+                $request->safe()->only(['nombres', 'apellido_paterno', 'apellido_materno'])
+            )
+        );
+
+        return redirect()->route('users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $user
+     * @param int $user
      * @return Response
      */
-    public function destroy(User $user)
+    public function destroy(int $user)
     {
-        //
+        DB::transaction(function () use ($user) {
+            Identificacion::whereRelation('user', 'id', $user)->delete();
+            User::where('id', $user)->delete();
+        });
+
+        return redirect()->route('users.index');
     }
 }

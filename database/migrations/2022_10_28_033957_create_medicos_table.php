@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('medicos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('especialidad_id')->nullable()->constrained('especialidades');
             $table->char('cedula', 8);
             $table->timestamps();

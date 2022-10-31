@@ -49,10 +49,18 @@
                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a href="{{route('users.destroy', $usuario->id)}}"
-                                           class="btn btn-sm icon btn-danger"
-                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar">
-                                            <i class="bi bi-trash"></i>
+                                        <form action="{{route('users.destroy', $usuario->id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm icon btn-danger"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar"
+                                            >
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                        <a href=""
+
+                                           >
                                         </a>
                                     </div>
                                 </td>

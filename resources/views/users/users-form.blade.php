@@ -34,7 +34,12 @@
             </div>
             <div class="card-content">
                 <div class="card-body">
+                    @isset($user)
+                    <form class="form" method="post" action="{{ route('users.update', $user) }}">
+                        @method('PATCH')
+                    @else
                     <form class="form" method="post" action="{{ route('users.store') }}">
+                    @endisset
                         @csrf
 
                         <h4 class="card-title">Datos personales</h4>
@@ -46,7 +51,7 @@
                             <input
                                 @class(['form-control', 'is-invalid' => $errors->has('nombres')])
                                 type="text" id="nombresInput"
-                                value="{{ old('nombres') ?? $user->identificacion->nombres ?? '' }}" required
+                                value="{{ old('nombres') ?? $user->identificacion->nombres ?? null }}" required
                                 placeholder="Nombre(s)" name="nombres" autocomplete="off"
                             >
                             <x-maz-input-error for="nombres" />
@@ -61,7 +66,7 @@
                                     <input
                                         @class(['form-control', 'is-invalid' => $errors->has('apellido_paterno')])
                                         type="text" id="apellidoPaternoInput" placeholder="Apellido paterno"
-                                        value="{{ old('apellido_paterno') ?? $user->identificacion->apellido_paterno ?? '' }}"
+                                        value="{{ old('apellido_paterno') ?? $user->identificacion->apellido_paterno ?? null }}"
                                         name="apellido_paterno" autocomplete="off" required
                                     >
                                     <x-maz-input-error for="apellido_paterno" />
@@ -76,7 +81,7 @@
                                     <input
                                         @class(['form-control', 'is-invalid' => $errors->has('apellido_materno')])
                                         type="text" id="apellidoMaternoInput" placeholder="Apellido materno"
-                                        value="{{ old('apellido_materno') ?? $user->identificacion->apellido_materno ?? '' }}"
+                                        value="{{ old('apellido_materno') ?? $user->identificacion->apellido_materno ?? null }}"
                                         name="apellido_materno" autocomplete="off" required
                                     >
                                     <x-maz-input-error for="apellido_materno" />
@@ -96,7 +101,7 @@
                                     @class(['form-control', 'is-invalid' => $errors->has('alias')])
                                     type="text" id="aliasInput" autocomplete="off" required
                                     placeholder="Alias" name="alias"
-                                    value="{{ old('alias') ?? $user->alias ?? '' }}"
+                                    value="{{ old('alias') ?? $user->alias ?? null }}"
                                 >
                                 <x-maz-input-error for="alias" />
                             </div>
@@ -121,8 +126,9 @@
                                 <div class="input-group">
                                     <input
                                         @class(['form-control', 'is-invalid' => $errors->has('password')])
-                                        type="text" id="passwordInput" autocomplete="off" required
+                                        type="text" id="passwordInput" autocomplete="off"
                                         placeholder="Contraseña" name="password" x-ref="password"
+                                        @if(!isset($user))required @endif
                                     >
                                     <button class="btn btn-outline-secondary" type="button" @click="$refs.password.value = random()">
                                         <i class="bi bi-dice-{{ random_int(1,6) }}"></i>
@@ -134,7 +140,7 @@
                                 <label for="rolInput" class="sr-only">Tipo</label>
                                 <select id="rolInput" name="rol_id" class="form-control">
                                 @foreach($roles as $id => $nombre)
-                                    <option value="{{ $id }}" @selected($id == old('rol_id'))>{{ $nombre }}</option>
+                                    <option value="{{ $id }}" @selected($id == (old('rol_id') ?? $user->rol->id ?? null) )>{{ $nombre }}</option>
                                 @endforeach
                                 </select>
                             </div>
@@ -142,8 +148,8 @@
 
                         <br>
                         <div class="form-actions d-flex justify-content-end">
-                            <button type="submit" class="btn btn-success me-1">
-                                Agregar
+                            <button type="submit" class="btn btn-success me-2">
+                                @isset($user) Actualizar @else Agregar @endisset
                             </button>
                             <a href="{{ route('users.index') }}" type="reset" class="btn btn-secondary">
                                 Cancelar
