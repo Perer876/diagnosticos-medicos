@@ -3,11 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
+ * @property string $nombre
+ * @property string $descripcion
+ * @property Collection $signos
+ * @property Collection $sintomas
+ * @property Collection $pruebas_laboratorio
+ * @property Collection $pruebas_post_mortem
+ * @property Collection $tratamientos
  */
 class Enfermedad extends Model
 {
@@ -27,13 +35,18 @@ class Enfermedad extends Model
         return $this->belongsToMany(Sintoma::class);
     }
 
-    public function pruebaLaboratorio()
+    public function pruebasLaboratorio()
     {
-        return $this->belongsTo(PruebaLaboratorio::class);
+        return $this->belongsToMany(PruebaLaboratorio::class);
     }
 
-    public function tratamiento()
+    public function pruebasPostMortem()
     {
-        return $this->belongsTo(Tratamiento::class);
+        return $this->belongsToMany(PruebaPostMortem::class);
+    }
+
+    public function tratamientos()
+    {
+        return $this->belongsToMany(Tratamiento::class);
     }
 }

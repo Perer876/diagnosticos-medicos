@@ -38,31 +38,14 @@
                         <tbody>
                         @foreach($usuarios as $usuario)
                             <tr>
-                                <td class="text-bold-500">{{ $usuario->alias }}</td>
+                                <td class="text-bold-500">
+                                    <a href="{{ route('users.show', $usuario) }}">{{ $usuario->alias }}</a>
+                                </td>
                                 <td class="text-bold-500">{{ $usuario->identificacion->nombre }}</td>
                                 <td><x-rol :usuario="$usuario"/></td>
                                 <td class="text-bold-500"><x-direccion :usuario="$usuario"/></td>
                                 <td>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{route('users.edit', $usuario->id)}}"
-                                           class="btn btn-sm icon btn-primary"
-                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-                                        <form action="{{route('users.destroy', $usuario->id)}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm icon btn-danger"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar"
-                                            >
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
-                                        <a href=""
-
-                                           >
-                                        </a>
-                                    </div>
+                                    @include('users.user-actions', ['user' => $usuario])
                                 </td>
                             </tr>
                         @endforeach

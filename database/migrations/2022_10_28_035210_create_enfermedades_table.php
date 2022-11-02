@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('enfermedades', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->foreignId('tratamiento_id')->nullable()->constrained('tratamientos');
-            $table->foreignId('prueba_laboratorio_id')->nullable()->constrained('pruebas_laboratorio');
+            $table->string('descripcion', 510)->nullable();
             $table->timestamps();
         });
     }
