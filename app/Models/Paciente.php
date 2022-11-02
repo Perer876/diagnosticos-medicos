@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $fecha_nacimiento
  * @property string $antecedentes_familiares
  * @property Identificacion $identificacion
- * @property Estado $estado
+ * @property Direccion $direccion
  * @property Collection $citas
  */
 class Paciente extends Model
@@ -27,9 +27,9 @@ class Paciente extends Model
         return $this->belongsTo(Identificacion::class);
     }
 
-    public function estado()
+    public function direccion()
     {
-        return $this->belongsTo(Estado::class);
+        return $this->belongsTo(Direccion::class);
     }
 
     public function citas()

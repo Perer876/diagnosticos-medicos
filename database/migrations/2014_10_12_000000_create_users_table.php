@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->foreignId('identificacion_id')->nullable()->constrained('identificaciones')->cascadeOnDelete();
             $table->foreignId('rol_id')->constrained('roles');
-            $table->foreignId('estado_id')->nullable()->constrained('estados');
+            $table->foreignId('direccion_id')->nullable()->constrained('direcciones');
             $table->string('alias')->unique();
             $table->string('password');
             $table->text('profile_photo_path')->nullable();
