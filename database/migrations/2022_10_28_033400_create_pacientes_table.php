@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('estado_id')->constrained('estados');
             $table->char('sexo', 1);
             $table->date('fecha_nacimiento');
-            $table->string('antecedentes_familiar', 510)->nullable();
+            $table->string('antecedentes_familiares', 510)->nullable();
             $table->timestamps();
         });
     }

@@ -13,11 +13,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $descripcion
  * @property Collection $enfermedades
  */
-class PruebaLaboratorio extends Model
+class PruebaPostMortem extends Model
 {
     use HasFactory;
 
-    protected $table = 'pruebas_laboratorio';
+    protected $table = 'pruebas_post_mortem';
 
     protected $guarded = [];
 

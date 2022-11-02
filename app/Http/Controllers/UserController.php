@@ -8,7 +8,6 @@ use App\Models\Identificacion;
 use App\Models\Rol;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -73,7 +72,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('users.user-show', compact('user'));
     }
 
     /**

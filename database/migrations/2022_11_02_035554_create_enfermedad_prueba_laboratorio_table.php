@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('medicos', function (Blueprint $table) {
+        Schema::create('enfermedad_prueba_laboratorio', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->char('cedula', 8);
-            $table->timestamps();
+            $table->foreignId('enfermedad_id')->constrained('enfermedades')->cascadeOnDelete();
+            $table->foreignId('prueba_laboratorio_id')->constrained('pruebas_laboratorio')->cascadeOnDelete();
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medicos');
+        Schema::dropIfExists('enfermedad_prueba_laboratorio');
     }
 };

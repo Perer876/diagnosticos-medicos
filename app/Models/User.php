@@ -10,6 +10,10 @@ use Laravel\Jetstream\HasProfilePhoto;
 /**
  * @property int $id
  * @property string $alias
+ * @property Identificacion $identificacion
+ * @property Rol $rol
+ * @property Estado $estado
+ * @property Medico $medico
  */
 class User extends Authenticatable
 {

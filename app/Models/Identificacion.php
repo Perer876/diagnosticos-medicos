@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
+ * @property string $nombres
+ * @property string $apellido_paterno
+ * @property string $apellido_materno
+ * @property string $nombre
+ * @property User $user
+ * @property Paciente $paciente
  */
 class Identificacion extends Model
 {

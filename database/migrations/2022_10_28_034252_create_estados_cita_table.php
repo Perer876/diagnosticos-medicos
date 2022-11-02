@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('estados_cita', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 64);
+            $table->string('color')->nullable()->default('primary');
         });
     }
 

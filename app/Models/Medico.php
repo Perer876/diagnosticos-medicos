@@ -3,11 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
+ * @property string $cedula
+ * @property User $user
+ * @property Collection $especialidades
+ * @property Collection $citas
  */
 class Medico extends Model
 {
@@ -20,9 +25,9 @@ class Medico extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function especialidad()
+    public function especialidades()
     {
-        return $this->belongsTo(Especialidad::class);
+        return $this->belongsToMany(Especialidad::class);
     }
 
     public function citas()
