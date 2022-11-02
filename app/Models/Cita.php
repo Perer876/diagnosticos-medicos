@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
+ * @property int $id
  * @property $fecha
  * @property $hora
  * @property Medico $medico

@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pacientes', function (Blueprint $table) {
+        Schema::create('direcciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('identificacion_id')->constrained('identificaciones')->cascadeOnDelete();
-            $table->foreignId('direccion_id')->constrained('direcciones');
-            $table->char('sexo', 1);
-            $table->date('fecha_nacimiento');
-            $table->string('antecedentes_familiares', 510)->nullable();
+            $table->foreignId('pais_id')->constrained('paises')->cascadeOnDelete();
+            $table->foreignId('estado_id')->constrained('estados')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pacientes');
+        Schema::dropIfExists('direcciones');
     }
 };

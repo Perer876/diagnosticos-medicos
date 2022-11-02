@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('estados', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pais_id')->constrained('paises');
-            $table->string('nombre');
+            $table->string('nombre')->nullable();
+            $table->string('codigo', 3)->nullable();
         });
     }
 

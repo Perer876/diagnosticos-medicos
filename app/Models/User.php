@@ -8,11 +8,10 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Jetstream\HasProfilePhoto;
 
 /**
- * @property int $id
  * @property string $alias
  * @property Identificacion $identificacion
  * @property Rol $rol
- * @property Estado $estado
+ * @property Direccion $direccion
  * @property Medico $medico
  */
 class User extends Authenticatable
@@ -66,9 +65,9 @@ class User extends Authenticatable
         return $this->belongsTo(Identificacion::class);
     }
 
-    public function estado()
+    public function direccion()
     {
-        return $this->belongsTo(Estado::class);
+        return $this->belongsTo(Direccion::class);
     }
 
     public function medico()

@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
+ * @property int $id
  * @property string $nombre
  * @property Pais $pais
- * @property Collection $users
- * @property Collection $pacientes
+ * @property Direccion $direccion
  */
 class Estado extends Model
 {
@@ -27,13 +27,8 @@ class Estado extends Model
         return $this->belongsTo(Pais::class);
     }
 
-    public function users()
+    public function direccion()
     {
-        return $this->hasMany(User::class);
-    }
-
-    public function pacientes()
-    {
-        return $this->hasMany(Paciente::class);
+        return $this->hasMany(Direccion::class);
     }
 }

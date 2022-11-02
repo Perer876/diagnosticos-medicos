@@ -9,7 +9,8 @@ return new class extends Migration {
     {
         Schema::create('paises', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('nombre')->nullable();
+            $table->char('codigo', 2)->nullable();
         });
     }
 
