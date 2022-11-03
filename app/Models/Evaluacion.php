@@ -10,6 +10,7 @@ use Ramsey\Collection\Collection;
 /**
  * @mixin Builder
  * @property int $id
+ * @property int $cita_id
  * @property Cita $cita
  * @property Collection $signos
  * @property Collection $sintomas

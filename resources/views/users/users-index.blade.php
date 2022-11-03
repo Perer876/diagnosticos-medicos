@@ -8,7 +8,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <x-breadcrumb>
                     <x-breadcrumb.item value="Dashboard" href="{{route('dashboard')}}"/>
-                    <x-breadcrumb.item value="Usuarios" active />
+                    <x-breadcrumb.item value="Usuarios" active/>
                 </x-breadcrumb>
             </div>
         </div>
@@ -27,13 +27,13 @@
                 <div class="table-responsive">
                     <table class="table align-middle table-lg mb-0 ">
                         <thead>
-                            <tr>
-                                <th>Alias</th>
-                                <th>Nombre</th>
-                                <th>Rol</th>
-                                <th>Dirección</th>
-                                <th>Acciones</th>
-                            </tr>
+                        <tr>
+                            <th>Alias</th>
+                            <th>Nombre</th>
+                            <th>Rol</th>
+                            <th>Dirección</th>
+                            <th>Acciones</th>
+                        </tr>
                         </thead>
                         <tbody>
                         @foreach($usuarios as $usuario)
@@ -42,8 +42,12 @@
                                     <a href="{{ route('users.show', $usuario) }}">{{ $usuario->alias }}</a>
                                 </td>
                                 <td class="text-bold-500">{{ $usuario->identificacion->nombre }}</td>
-                                <td><x-rol :usuario="$usuario"/></td>
-                                <td class="text-bold-500"><x-direccion :usuario="$usuario"/></td>
+                                <td>
+                                    <x-rol :usuario="$usuario"/>
+                                </td>
+                                <td class="text-bold-500">
+                                    <x-direccion :usuario="$usuario"/>
+                                </td>
                                 <td>
                                     @include('users.user-actions', ['user' => $usuario])
                                 </td>
@@ -55,5 +59,5 @@
             </div>
         </div>
     </section>
-    @include('scripts.tooltips')
+    @include('plugins.tooltips')
 </x-app-layout>
