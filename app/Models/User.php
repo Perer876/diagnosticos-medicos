@@ -7,6 +7,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Jetstream\HasProfilePhoto;
 
+/**
+ * @property string $alias
+ * @property int $identificacion_id
+ * @property Identificacion $identificacion
+ * @property int $rol_id
+ * @property Rol $rol
+ * @property int $direccion_id
+ * @property Direccion $direccion
+ * @property Medico $medico
+ */
 class User extends Authenticatable
 {
     use HasFactory;
@@ -58,9 +68,9 @@ class User extends Authenticatable
         return $this->belongsTo(Identificacion::class);
     }
 
-    public function estado()
+    public function direccion()
     {
-        return $this->belongsTo(Estado::class);
+        return $this->belongsTo(Direccion::class);
     }
 
     public function medico()

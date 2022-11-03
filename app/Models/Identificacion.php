@@ -2,10 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @mixin Builder
+ * @property int $id
+ * @property string $nombres
+ * @property string $apellido_paterno
+ * @property string $apellido_materno
+ * @property string $nombre
+ * @property User $user
+ * @property Paciente $paciente
+ */
 class Identificacion extends Model
 {
     use HasFactory;
@@ -20,7 +31,7 @@ class Identificacion extends Model
     {
         return Attribute::make(
             get: fn ($value, $attributes) =>
-                $attributes['nombres'] . $attributes['apellido_paterno'] . $attributes['apellido_materno']
+                $attributes['nombres'] . ' ' . $attributes['apellido_paterno'] . ' ' . $attributes['apellido_materno']
         );
     }
 

@@ -2,9 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @mixin Builder
+ * @property int $id
+ * @property string $nombre
+ * @property Collection $medicos
+ */
 class Especialidad extends Model
 {
     use HasFactory;
@@ -17,6 +25,6 @@ class Especialidad extends Model
 
     public function medicos()
     {
-        return $this->hasMany(Medico::class);
+        return $this->belongsToMany(Medico::class);
     }
 }

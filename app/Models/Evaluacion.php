@@ -2,9 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Collection\Collection;
 
+/**
+ * @mixin Builder
+ * @property int $id
+ * @property int $cita_id
+ * @property Cita $cita
+ * @property Collection $signos
+ * @property Collection $sintomas
+ */
 class Evaluacion extends Model
 {
     use HasFactory;

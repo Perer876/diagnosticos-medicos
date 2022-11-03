@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('pacientes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('identificacion_id')->constrained('identificaciones');
-            $table->foreignId('estado_id')->constrained('estados');
+            $table->foreignId('identificacion_id')->constrained('identificaciones')->cascadeOnDelete();
+            $table->foreignId('direccion_id')->constrained('direcciones');
             $table->char('sexo', 1);
             $table->date('fecha_nacimiento');
-            $table->string('antecedentes_familiar', 510)->nullable();
+            $table->string('antecedentes_familiares', 510)->nullable();
             $table->timestamps();
         });
     }

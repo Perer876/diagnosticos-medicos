@@ -6,11 +6,10 @@
                 <p class="text-subtitle text-muted">Administra tus usuarios</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
-                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                    </ol>
-                </nav>
+                <x-breadcrumb>
+                    <x-breadcrumb.item value="Dashboard" href="{{route('dashboard')}}"/>
+                    <x-breadcrumb.item value="Usuarios" active/>
+                </x-breadcrumb>
             </div>
         </div>
     </x-slot>
@@ -26,40 +25,41 @@
             </div>
             <div class="card-content">
                 <div class="table-responsive">
-                    <table class="table mb-0 table-lg">
+                    <table class="table align-middle table-lg mb-0 ">
                         <thead>
-                            <tr>
-                                <th>Alias</th>
-                                <th>Nombre</th>
-                                <th>Rol</th>
-                                <th>Ubicación</th>
-                                <th>Acciones</th>
-                            </tr>
+                        <tr>
+                            <th>Alias</th>
+                            <th>Nombre</th>
+                            <th>Rol</th>
+                            <th>Dirección</th>
+                            <th>Acciones</th>
+                        </tr>
                         </thead>
                         <tbody>
+                        @foreach($usuarios as $usuario)
                             <tr>
-                                <td class="text-bold-500">Perer876</td>
-                                <td class="text-bold-500">Oscar Eduardo Arámbula Vega</td>
-                                <td>Medico</td>
-                                <td class="text-bold-500">Jalisco, México</td>
+                                <td class="text-bold-500">
+                                    <a href="{{ route('users.show', $usuario) }}">{{ $usuario->alias }}</a>
+                                </td>
+                                <td class="text-bold-500">{{ $usuario->identificacion->nombre }}</td>
                                 <td>
-                                    <div class="btn-group mb-3" role="group" aria-label="Basic example">
-                                        <a href="{{route('users.edit', 0)}}" class="btn btn-sm icon btn-primary"
-                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-                                        <a href="{{route('users.destroy', 0)}}" class="btn btn-sm icon btn-danger"
-                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </div>
+                                    <x-rol :usuario="$usuario"/>
+                                </td>
+                                <td class="text-bold-500">
+                                    <x-direccion :usuario="$usuario"/>
+                                </td>
+                                <td>
+                                    @include('users.user-actions', ['user' => $usuario])
                                 </td>
                             </tr>
+                        @endforeach
                         </tbody>
                     </table>
+                @empty($usuarios->all())
+                    <div class="text-center p-5">No hay usuarios</div>
+                @endempty
                 </div>
             </div>
         </div>
     </section>
-    @include('scripts.tooltips')
 </x-app-layout>

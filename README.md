@@ -30,5 +30,5 @@
     ```
 ## Credenciales de inicio de sesión
 
-* **Email:** user@gmail.com
+* **Alias:** Admin
 * **Password:** password
