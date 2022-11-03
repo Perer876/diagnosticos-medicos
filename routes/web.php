@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SintomaController;
 
 
 Route::get('/',  fn() => redirect('dashboard'));
@@ -11,3 +12,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('users', UserController::class)->middleware('auth:sanctum');
+
+Route::resource('sintomas', SintomaController::class)->middleware('auth:sanctum');

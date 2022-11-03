@@ -9,7 +9,10 @@ class Sintoma extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+    ];
 
     public $timestamps = false;
 
