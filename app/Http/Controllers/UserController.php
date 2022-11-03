@@ -108,7 +108,7 @@ class UserController extends Controller
         Direccion::whereRelation('user', 'id', $user)
             ->update($request->safe()->only(['pais_id', 'estado_id']));
 
-        Identificacion::whereRelation('user', 'id', $user)->updateOrCreate(
+        Identificacion::whereRelation('user', 'id', $user)->update(
             array_map(
                 fn ($valor) => ucwords($valor),
                 $request->safe()->only(['nombres', 'apellido_paterno', 'apellido_materno'])
@@ -128,6 +128,7 @@ class UserController extends Controller
     {
         DB::transaction(function () use ($user) {
             Identificacion::whereRelation('user', 'id', $user)->delete();
+            Direccion::whereRelation('user', 'id', $user)->delete();
             User::where('id', $user)->delete();
         });
 

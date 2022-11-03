@@ -14,7 +14,12 @@
                 <x-breadcrumb>
                     <x-breadcrumb.item value="Dashboard" href="{{ route('dashboard') }}" />
                     <x-breadcrumb.item value="Usuarios" href="{{ route('users.index') }}" />
-                    <x-breadcrumb.item value="Nuevo" active />
+                @isset($user)
+                    <x-breadcrumb.item value="{{ $user->alias }}" href="{{ route('users.show', $user) }}"/>
+                    <x-breadcrumb.item value="Editar" active/>
+                @else
+                    <x-breadcrumb.item value="Nuevo" active/>
+                @endisset
                 </x-breadcrumb>
             </div>
         </div>
@@ -43,51 +48,11 @@
                         @csrf
 
                         <h4 class="card-title">Datos personales</h4>
-                        <div class="form-group">
-                            <label for="nombresInput" class="sr-only">
-                                Nombre(s)
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input
-                                @class(['form-control', 'is-invalid' => $errors->has('nombres')])
-                                type="text" id="nombresInput"
-                                value="{{ old('nombres') ?? $user->identificacion->nombres ?? null }}" required
-                                placeholder="Nombre(s)" name="nombres" autocomplete="off"
-                            >
-                            <x-maz-input-error for="nombres" />
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="apellidoPaternoInput" class="sr-only">
-                                        Apellido paterno
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input
-                                        @class(['form-control', 'is-invalid' => $errors->has('apellido_paterno')])
-                                        type="text" id="apellidoPaternoInput" placeholder="Apellido paterno"
-                                        value="{{ old('apellido_paterno') ?? $user->identificacion->apellido_paterno ?? null }}"
-                                        name="apellido_paterno" autocomplete="off" required
-                                    >
-                                    <x-maz-input-error for="apellido_paterno" />
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="apellidoMaternoInput" class="sr-only">
-                                        Apellido materno
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input
-                                        @class(['form-control', 'is-invalid' => $errors->has('apellido_materno')])
-                                        type="text" id="apellidoMaternoInput" placeholder="Apellido materno"
-                                        value="{{ old('apellido_materno') ?? $user->identificacion->apellido_materno ?? null }}"
-                                        name="apellido_materno" autocomplete="off" required
-                                    >
-                                    <x-maz-input-error for="apellido_materno" />
-                                </div>
-                            </div>
-                        </div>
+                        @isset ($user)
+                            @include('identificaciones.datos-personales-inputs', ['identificacion' => $user->identificacion])
+                        @else
+                            @include('identificaciones.datos-personales-inputs')
+                        @endisset
 
                         <br>
                         <h4 class="card-title">Dirección</h4>
