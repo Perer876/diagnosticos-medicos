@@ -90,6 +90,14 @@
                         </div>
 
                         <br>
+                        <h4 class="card-title">Dirección</h4>
+                        @isset ($user)
+                            <livewire:seleccionar-direccion :direccion="$user->direccion"/>
+                        @else
+                            <livewire:seleccionar-direccion/>
+                        @endisset
+
+                        <br>
                         <h4 class="card-title">Cuenta</h4>
                         <div class="form-body">
                             <div class="form-group">

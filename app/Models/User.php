@@ -9,8 +9,11 @@ use Laravel\Jetstream\HasProfilePhoto;
 
 /**
  * @property string $alias
+ * @property int $identificacion_id
  * @property Identificacion $identificacion
+ * @property int $rol_id
  * @property Rol $rol
+ * @property int $direccion_id
  * @property Direccion $direccion
  * @property Medico $medico
  */

@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Models\Identificacion;
-use App\Models\Rol;
-use App\Models\User;
+use App\Models\{User, Direccion, Identificacion, Rol};
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $usuarios = User::with(['estado', 'identificacion', 'rol'])->get();
+        $usuarios = User::with(['direccion', 'identificacion', 'rol'])->get();
 
         return view('users.users-index', compact('usuarios'));
     }
@@ -42,7 +40,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreUserRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(StoreUserRequest $request)
     {
@@ -54,10 +52,13 @@ class UserController extends Controller
                 )
             );
 
+            $direccion = Direccion::create($request->safe()->only(['pais_id', 'estado_id']));
+
             User::create([
                 ...$request->safe()->only(['alias', 'rol_id']),
                 'password' => Hash::make($request->input('password')),
                 'identificacion_id' => $identificacion->id,
+                'direccion_id' => $direccion->id,
             ]);
         });
 
@@ -104,7 +105,10 @@ class UserController extends Controller
 
         User::where('id', $user)->update($userData);
 
-        Identificacion::whereRelation('user', 'id', $user)->update(
+        Direccion::whereRelation('user', 'id', $user)
+            ->update($request->safe()->only(['pais_id', 'estado_id']));
+
+        Identificacion::whereRelation('user', 'id', $user)->updateOrCreate(
             array_map(
                 fn ($valor) => ucwords($valor),
                 $request->safe()->only(['nombres', 'apellido_paterno', 'apellido_materno'])

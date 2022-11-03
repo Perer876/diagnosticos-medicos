@@ -9,10 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
+ * @property int $id
  * @property string $sexo
  * @property $fecha_nacimiento
  * @property string $antecedentes_familiares
+ * @property int $identificacion_id
  * @property Identificacion $identificacion
+ * @property int $direccion_id
  * @property Direccion $direccion
  * @property Collection $citas
  */

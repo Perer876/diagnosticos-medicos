@@ -28,11 +28,6 @@
     ```bash
     php artisan migrate --seed
     ```
-   Para llenar los datos de los países y estados del mundo, 
-    ejecutar. Se toma un poco de tiempo:
-    ```bash
-    php artisan db:seed --class=PaisesEstadosSeeder
-    ```
 ## Credenciales de inicio de sesión
 
 * **Alias:** Admin

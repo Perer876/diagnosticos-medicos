@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
+ * @property int $id
  * @property string $nombres
  * @property string $apellido_paterno
  * @property string $apellido_materno

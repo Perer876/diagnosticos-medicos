@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
+ * @property int $id
  * @property string $cedula
+ * @property int $user_id
  * @property User $user
  * @property Collection $especialidades
  * @property Collection $citas

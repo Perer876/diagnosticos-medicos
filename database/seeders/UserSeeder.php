@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Direccion;
 use App\Models\Identificacion;
 use App\Models\User;
 use App\Models\Rol;

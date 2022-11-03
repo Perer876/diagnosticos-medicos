@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin Builder
  * @property int $id
  * @property string $nombre
+ * @property int $pais_id
  * @property Pais $pais
  * @property Direccion $direccion
  */

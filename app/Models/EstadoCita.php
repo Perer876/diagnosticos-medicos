@@ -24,7 +24,7 @@ class EstadoCita extends Model
 
     public $timestamps = false;
 
-    protected function citas()
+    public function citas()
     {
         return $this->hasMany(Cita::class, 'estado_cita_id');
     }

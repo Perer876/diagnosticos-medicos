@@ -29,6 +29,8 @@ class UpdateUserRequest extends FormRequest
             'nombres' => ['required', 'string', 'max:255'],
             'apellido_paterno' => ['required', 'string', 'max:255'],
             'apellido_materno' => ['required', 'string', 'max:255'],
+            'pais_id' => ['required', 'exists:paises,id'],
+            'estado_id' => ['required', 'exists:estados,id'],
             'alias' => ['required', 'string', 'max:255', Rule::unique('users', 'alias')->ignore($this->route('user'))],
             'password' => ['nullable', Password::min(8)],
             'rol_id' => ['required', 'exists:roles,id'],
