@@ -2,13 +2,13 @@
     <x-slot name="header">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Usuarios</h3>
-                <p class="text-subtitle text-muted">Administra tus usuarios</p>
+                <h3>Pacientes</h3>
+                <p class="text-subtitle text-muted">Administra los pacientes.</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <x-breadcrumb>
                     <x-breadcrumb.item value="Dashboard" href="{{route('dashboard')}}"/>
-                    <x-breadcrumb.item value="Usuarios" active/>
+                    <x-breadcrumb.item value="Pacientes" active/>
                 </x-breadcrumb>
             </div>
         </div>
@@ -18,8 +18,8 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title">Listado</h4>
-                <a class="btn btn-success rounded-pill" href="{{route('users.create')}}">
-                    Nuevo usuario
+                <a class="btn btn-success rounded-pill" href="{{route('pacientes.create')}}">
+                    Nuevo paciente
                     <i class="bi bi-person-plus"></i>
                 </a>
             </div>
@@ -28,35 +28,31 @@
                     <table class="table align-middle table-lg mb-0 ">
                         <thead>
                         <tr>
-                            <th>Alias</th>
                             <th>Nombre</th>
-                            <th>Rol</th>
                             <th>Dirección</th>
+                            <th>Sexo</th>
+                            <th>Fecha nacimiento</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($usuarios as $usuario)
+                        @foreach($pacientes as $paciente)
                             <tr>
                                 <td class="text-bold-500">
-                                    <a href="{{ route('users.show', $usuario) }}">{{ $usuario->alias }}</a>
+                                    <a href="{{ route('pacientes.show', $paciente) }}">
+                                        {{ $paciente->identificacion->nombre }}
+                                    </a>
                                 </td>
-                                <td class="text-bold-500">{{ $usuario->identificacion->nombre }}</td>
-                                <td>
-                                    <x-rol :usuario="$usuario"/>
-                                </td>
-                                <td class="text-bold-500">
-                                    <x-direccion :usuario="$usuario"/>
-                                </td>
-                                <td>
-                                    @include('users.user-actions', ['user' => $usuario])
-                                </td>
+                                <td class="text-bold-500"><x-direccion :usuario="$paciente"/></td>
+                                <td>{{ $paciente->sexo->name }}</td>
+                                <td>{{ $paciente->fecha_nacimiento }}</td>
+                                <td>@include('pacientes.paciente-acciones', ['$paciente' => $paciente])</td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
-                @empty($usuarios->all())
-                    <div class="text-center p-5">No hay usuarios</div>
+                @empty($pacientes->all())
+                    <div class="text-center p-5">No hay pacientes</div>
                 @endempty
                 </div>
             </div>
