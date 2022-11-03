@@ -43,8 +43,7 @@ class SintomaController extends Controller
             'nombre' => $request->input('nombre'),
             'descripcion' => $request->input('descripcion')
         ]);
-
-        // Sintoma::create($request->all());
+        
         return redirect()->route('sintomas.index');
     }
 
