@@ -7,7 +7,7 @@
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <x-breadcrumb>
-                    <x-breadcrumb.item value="Dashboard" href="{{route('dashboard')}}"/>
+                    <x-breadcrumb.item value="Dashboard" href="{{ route('dashboard') }}"/>
                     <x-breadcrumb.item value="Pacientes" active/>
                 </x-breadcrumb>
             </div>
@@ -18,7 +18,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title">Listado</h4>
-                <a class="btn btn-success rounded-pill" href="{{route('pacientes.create')}}">
+                <a class="btn btn-success rounded-pill" href="{{ route('pacientes.create') }}">
                     Nuevo paciente
                     <i class="bi bi-person-plus"></i>
                 </a>
