@@ -1,4 +1,17 @@
-<form action="{{route('users.destroy', $user->id)}}" method="post">
+<form action="{{route('users.destroy', $user->id)}}" method="post" x-data @submit.prevent="
+    Swal.fire({
+        icon: 'warning',
+        title: 'Cuidado',
+        text: '¿Esta seguro que desea eliminar este usuario?',
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $event.target.submit();
+        }
+    });
+">
     @csrf
     @method('DELETE')
 
@@ -8,7 +21,7 @@
            data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
             <i class="bi bi-pencil"></i>
         </a>
-        <button type="submit" class="btn btn-sm icon btn-danger"
+        <button type="submit" class="btn btn-sm icon btn-danger" @disabled(auth()->user()->id === $user->id)
                 data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar"
         >
             <i class="bi bi-trash"></i>
@@ -16,3 +29,4 @@
     </div>
 </form>
 @include('plugins.tooltips')
+@include('plugins.sweet-alert')

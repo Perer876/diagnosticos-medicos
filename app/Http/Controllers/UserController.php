@@ -126,6 +126,8 @@ class UserController extends Controller
      */
     public function destroy(int $user)
     {
+        abort_if(auth()->user()->id == $user, 401);
+
         DB::transaction(function () use ($user) {
             Identificacion::whereRelation('user', 'id', $user)->delete();
             Direccion::whereRelation('user', 'id', $user)->delete();

@@ -7,7 +7,7 @@
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <x-breadcrumb>
-                    <x-breadcrumb.item value="Dashboard" href="{{route('dashboard')}}"/>
+                    <x-breadcrumb.item value="Dashboard" href="{{ route('dashboard') }}"/>
                     <x-breadcrumb.item value="Pacientes" href="{{ route('pacientes.index') }}" />
                     <x-breadcrumb.item value="{{ $paciente->identificacion->nombre }}" active />
                 </x-breadcrumb>

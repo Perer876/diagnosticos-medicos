@@ -1,4 +1,17 @@
-<form action="{{route('pacientes.destroy', $paciente->id)}}" method="post">
+<form action="{{route('pacientes.destroy', $paciente->id)}}" method="post" x-data @submit.prevent="
+    Swal.fire({
+        icon: 'warning',
+        title: 'Cuidado',
+        text: '¿Esta seguro que desea eliminar este paciente?',
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $event.target.submit();
+        }
+    });
+">
     @csrf
     @method('DELETE')
 
@@ -15,3 +28,4 @@
     </div>
 </form>
 @include('plugins.tooltips')
+@include('plugins.sweet-alert')
