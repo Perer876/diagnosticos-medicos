@@ -8,7 +8,7 @@
                 @else
                     <p class="text-subtitle text-muted">Agregar síntoma</p>
                 @endif
-                
+
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -34,9 +34,9 @@
                     <div class="form-group position-relative has-icon-left m-3">
                         <span class="text-danger">*</span>
                         <input
-                        @class(['form-control', 'is-invalid' => $errors->has('nombre')]) 
+                        @class(['form-control', 'is-invalid' => $errors->has('nombre')])
                         type="text" name="nombre" placeholder="Nombre" value="{{ $sintoma->nombre ?? null }}" required>
-                        
+
                         <div class="form-control-icon">
                             <i class="bi bi-clipboard2-pulse"></i>
                         </div>
@@ -48,16 +48,16 @@
                             <i class="bi bi-clipboard2-pulse"></i>
                         </div>
                     </div>
-                    <div class="text-center"> 
+                    <div class="text-center">
                         @if (isset($sintoma))
-                            <button class="btn btn-primary shadow-lg m-3">Actualizar síntoma</button>  
+                            <button class="btn btn-primary shadow-lg m-3">Actualizar síntoma</button>
                         @else
                         <button class="btn btn-primary shadow-lg m-3">Agregar síntoma</button>
-                        @endif                        
-                    </div>                    
+                        @endif
+                    </div>
                 </form>
             </div>
         </div>
     </section>
-    @include('scripts.tooltips')
+    @include('plugins.tooltips')
 </x-app-layout>

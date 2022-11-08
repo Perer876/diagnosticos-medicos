@@ -28,7 +28,7 @@
                 <div class="table-responsive">
                     <table class="table mb-0 table-lg">
                         <thead>
-                            <tr>                                
+                            <tr>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
                                 <th>Acciones</th>
@@ -47,7 +47,7 @@
                                             </a>
                                             <form action="{{ route('sintomas.destroy', $sintoma) }}" method="POST">
                                                 @csrf
-                                                @method('DELETE')                                                
+                                                @method('DELETE')
                                                 <button type="submit" class="btn btn-sm icon btn-danger"
                                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar">
                                                     <i class="bi bi-trash"></i></button>
@@ -56,12 +56,12 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </section>
-    @include('scripts.tooltips')
+    @include('plugins.tooltips')
 </x-app-layout>
