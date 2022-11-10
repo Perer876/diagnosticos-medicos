@@ -12,6 +12,8 @@ use Ramsey\Collection\Collection;
  * @property int $id
  * @property int $cita_id
  * @property Cita $cita
+ * @property int $enfemedad_id
+ * @property Enfermedad $enfermedad
  * @property Collection $signos
  * @property Collection $sintomas
  */
@@ -38,5 +40,10 @@ class Evaluacion extends Model
     public function sintomas()
     {
         return $this->belongsToMany(Sintoma::class);
+    }
+    
+    public function enfermedad()
+    {
+        return $this->belongsTo(Enfermedad::class);
     }
 }
