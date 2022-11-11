@@ -54,23 +54,27 @@
                         <i class="bi bi-person-workspace"></i>
                         Medico
                     </h4>
-                    <a href=""></a>
+                    <a href="{{ route('medicos.edit', $user->id) }}" class="btn btn-primary btn-sm">
+                        <i class="bi bi-pen"></i>
+                    </a>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
                         <span class="card-text">
                             <h6 class="card-subtitle">Cédula</h6>
                             @if ($user->medico->cedula)
-                                <p><span class="badge bg-light-info fst-italic">{{ $user->medico->cedula }}</span>
+                                <p><span class="badge bg-light-info">{{ $user->medico->cedula }}</span>
                             @else
                                 <p><span class="fst-italic">Vacio</span>
                             @endif
                             <h6 class="card-subtitle">Especialidades</h6>
+                            <p>
                             @forelse($user->medico->especialidades()->pluck('nombre') as $especialidad)
-                                <p><span class="badge bg-light-secondary fst-italic">Vacio</span>
+                                <span class="badge bg-light-warning mb-2 me-1">{{ $especialidad }}</span>
                             @empty
-                                <p><span class="fst-italic">Sin especialidades</span>
+                                <span class="fst-italic">Sin especialidades</span>
                             @endforelse
+                            </p>
                         </span>
                     </div>
                 </div>

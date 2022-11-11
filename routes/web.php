@@ -29,8 +29,8 @@ Route::resource('especialidades', EspecialidadController::class)->middleware('au
 Route::prefix('medicos')->controller(MedicoController::class)->middleware(['auth:sanctum'])
     ->name('medicos.')
     ->group(function () {
-        Route::get('/index', 'index')->name('index');
+        Route::get('/', 'index')->name('index');
         Route::get('/{user}/edit', 'edit')->name('edit');
-        Route::get('/{user}/update', 'update')->name('update');
+        Route::patch('/{user}/update', 'update')->name('update');
     });
 
