@@ -4,4 +4,5 @@
     <x-maz-sidebar-item name="Sintomas" :link="route('sintomas.index')" icon="bi bi-clipboard2-heart" />
     <x-maz-sidebar-item name="Signos" :link="route('signos.index')" icon="bi bi-clipboard2-pulse" />
     <x-maz-sidebar-item name="Pacientes" :link="route('pacientes.index')" icon="bi bi-heart-pulse" />
+    <x-maz-sidebar-item name="Tratamientos" :link="route('tratamientos.index')" icon="bi bi-capsule" />
 </x-maz-sidebar>
