@@ -31,5 +31,7 @@ class UserSeeder extends Seeder
             'identificacion_id' => $identificacion->id,
             'rol_id' => Rol::first()->id,
         ]);
+
+        User::factory()->count(20)->create();
     }
 }
