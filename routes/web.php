@@ -7,6 +7,7 @@ use App\Http\Controllers\SintomaController;
 use App\Http\Controllers\SignoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\PruebaLaboratorioController;
 
 Route::get('/',  fn() => redirect('dashboard'));
 
@@ -19,6 +20,8 @@ Route::resource('users', UserController::class)->middleware('auth:sanctum');
 Route::resource('sintomas', SintomaController::class)->middleware('auth:sanctum');
 
 Route::resource('signos', SignoController::class)->middleware('auth:sanctum');
+
+Route::resource('pruebas-lab', PruebaLaboratorioController::class)->middleware('auth:sanctum');
 
 Route::resource('pacientes', PacienteController::class)->middleware('auth:sanctum');
 
