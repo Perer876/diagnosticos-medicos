@@ -62,11 +62,7 @@
                     <div class="card-body">
                         <span class="card-text">
                             <h6 class="card-subtitle">Cédula</h6>
-                            @if ($user->medico->cedula)
-                                <p><span class="badge bg-light-info">{{ $user->medico->cedula }}</span>
-                            @else
-                                <p><span class="fst-italic">Vacio</span>
-                            @endif
+                            <x-cedula :medico="$user->medico" />
                             <h6 class="card-subtitle">Especialidades</h6>
                             <p>
                             @forelse($user->medico->especialidades()->pluck('nombre') as $especialidad)

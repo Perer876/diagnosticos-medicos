@@ -10,7 +10,13 @@ class MedicoController extends Controller
 {
     public function index()
     {
-        return "INDEX";
+        $usuarios = User::with([
+            'direccion' => ['pais', 'estado'],
+            'identificacion',
+            'medico']
+        )->whereRolIs('Medico')->get();
+
+        return view('medicos.medicos-index', compact('usuarios'));
     }
 
     public function edit(User $user)
