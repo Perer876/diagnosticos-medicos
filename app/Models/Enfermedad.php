@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Collection $pruebas_laboratorio
  * @property Collection $pruebas_post_mortem
  * @property Collection $tratamientos
+ * @property Collection $enfermedades
  */
 class Enfermedad extends Model
 {
@@ -49,5 +50,10 @@ class Enfermedad extends Model
     public function tratamientos()
     {
         return $this->belongsToMany(Tratamiento::class);
+    }
+
+    public function evaluaciones()
+    {
+        return $this->hasMany(Evaluacion::class);
     }
 }

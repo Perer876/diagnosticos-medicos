@@ -14,11 +14,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property $hora
  * @property int $medico_id
  * @property Medico $medico
- * @property Paciente $paciente
  * @property int $paciente_id
+ * @property Paciente $paciente
  * @property Collection $evaluaciones
- * @property EstadoCita $estado
  * @property int $estado_cita_id
+ * @property EstadoCita $estado
  */
 class Cita extends Model
 {

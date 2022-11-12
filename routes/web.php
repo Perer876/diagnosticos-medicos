@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EspecialidadController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\SintomaController;
@@ -23,3 +24,7 @@ Route::resource('signos', SignoController::class)->middleware('auth:sanctum');
 Route::resource('tratamientos', TratamientoController::class)->middleware('auth:sanctum');
 
 Route::resource('pacientes', PacienteController::class)->middleware('auth:sanctum');
+
+Route::resource('especialidades', EspecialidadController::class)->middleware('auth:sanctum')
+    ->except('show')->parameter('especialidades','especialidad');
+
