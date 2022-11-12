@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Jetstream\HasProfilePhoto;
 
 /**
+ * @mixin Builder
  * @property string $alias
  * @property int $identificacion_id
  * @property Identificacion $identificacion
@@ -75,6 +78,24 @@ class User extends Authenticatable
 
     public function medico()
     {
-        return $this->hasOne(Medico::class);
+        return $this->hasOne(Medico::class)->withDefault();
+    }
+
+    public function tieneRol($nombre): bool
+    {
+        return Str::lower($this->rol->nombre) === Str::lower($nombre);
+    }
+
+    /**
+     * Filtra los usuarios según el nombre del rol que se le pase.
+     * @param Builder $query
+     * @param string $rol
+     * @return void
+     */
+    public function scopeWhereRolIs(Builder $query, string $rol)
+    {
+        $query->whereHas('rol', function (Builder $query) use ($rol) {
+            $query->where('nombre', '=', $rol);
+        });
     }
 }

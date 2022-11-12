@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EspecialidadController;
+use App\Http\Controllers\MedicoController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\SintomaController;
@@ -27,4 +28,12 @@ Route::resource('pacientes', PacienteController::class)->middleware('auth:sanctu
 
 Route::resource('especialidades', EspecialidadController::class)->middleware('auth:sanctum')
     ->except('show')->parameter('especialidades','especialidad');
+
+Route::prefix('medicos')->controller(MedicoController::class)->middleware(['auth:sanctum'])
+    ->name('medicos.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{user}/edit', 'edit')->name('edit');
+        Route::patch('/{user}/update', 'update')->name('update');
+    });
 
