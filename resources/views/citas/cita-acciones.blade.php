@@ -1,5 +1,20 @@
-<div class="dropdown">
-    <button class="btn btn-outline-secondary" type="button" id="dropdownMenuButtonSec" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="dropdown" x-data="{
+    confirmDelete(form) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Cuidado',
+            text: '¿Esta seguro que desea eliminar esta cita?',
+            showCancelButton: true,
+            confirmButtonText: 'Eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    }
+}">
+    <button class="btn btn-outline-secondary" type="button" id="dropdownMenuAccionesCita" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="bi bi-three-dots-vertical"></i>
     </button>
     <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButtonSec" style="">
@@ -15,10 +30,10 @@
             <i class="bi bi-card-checklist text-info me-3"></i>
             Evaluar
         </a>
-        <a class="dropdown-item" href="#">
+        <button class="dropdown-item" role="button" @click="confirmDelete($refs.delete_cita)">
             <i class="bi bi-trash text-danger me-3"></i>
             Eliminar
-        </a>
+        </button>
     </div>
     <div class="modal fade text-left" id="modal-cambiar-estado-cita" tabindex="-1" role="dialog"
          aria-labelledby="modal-header-cambiar-estado-cita" aria-hidden="true">
@@ -58,4 +73,9 @@
             </div>
         </div>
     </div>
+    <form action="{{ route('citas.destroy', $cita) }}" method="post" x-ref="delete_cita">
+        @method('DELETE')
+        @csrf
+    </form>
 </div>
+@include('plugins.sweet-alert')

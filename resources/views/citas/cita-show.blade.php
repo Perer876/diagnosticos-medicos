@@ -14,8 +14,8 @@
         </div>
     </x-slot>
 
-    <section class="section row gx-4">
-        <div class="col-12 col-md-6">
+    <section class="section row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-xl-6">
             <div class="card ">
                 <div class="card-header d-flex justify-content-between">
                     <h4 class="card-title">

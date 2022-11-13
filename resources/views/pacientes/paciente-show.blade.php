@@ -66,7 +66,7 @@
                 <div class="card-content">
                     <div class="card-body">
                         <div class="list-group">
-                            @foreach($paciente->citas as $cita)
+                            @foreach($paciente->citas()->with(['user.identificacion', 'estado'])->get() as $cita)
                                 <a href="{{ route('citas.show', $cita->id) }}" class="list-group-item list-group-item-action">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">

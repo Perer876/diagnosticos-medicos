@@ -61,7 +61,7 @@
                                             @class(['form-control', 'is-invalid' => $errors->has('fecha')])
                                             type="date" id="fecha-input" autocomplete="off"
                                             name="fecha" required
-                                            value="{{ old('fecha') ?? $cita->fecha->format('Y-m-d') ?? null }}"
+                                            value="{{ old('fecha') ?? isset($cita) ? $cita->fecha->format('Y-m-d') : null }}"
                                         >
                                         <x-maz-input-error for="fecha" />
                                     </div>
@@ -76,7 +76,7 @@
                                             @class(['form-control', 'is-invalid' => $errors->has('hora')])
                                             type="time" id="hora-input" autocomplete="off"
                                             name="hora" required
-                                            value="{{ old('hora') ?? $cita->hora->format('H:i') ?? null }}"
+                                            value="{{ old('hora') ?? isset($cita) ? $cita->hora->format('H:i') : null }}"
                                         >
                                         <x-maz-input-error for="hora" />
                                     </div>
@@ -105,7 +105,7 @@
                                         @class(['form-control choices', 'is-invalid' => $errors->has('user_id')])>
                                     <option value="">Seleccionar medico</option>
                                     @foreach(\App\Models\User::whereRolIs('Medico')->get() as $user)
-                                        <option value="{{ $user->id }}" @selected($user->id == (old('user_id') ?? $cita->user_id))>{{ $user->identificacion->nombre }}</option>
+                                        <option value="{{ $user->id }}" @selected($user->id == (old('user_id') ?? isset($cita) ? $cita->user_id : null))>{{ $user->identificacion->nombre }}</option>
                                     @endforeach
                                 </select>
                                 <x-maz-input-error for="user_id" />
