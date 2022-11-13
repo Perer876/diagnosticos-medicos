@@ -20,7 +20,7 @@
             <div class="card ">
                 <div class="card-header d-flex justify-content-between">
                     <h4 class="card-title">
-                        <i class="bi bi-person-circle"></i>
+                        <i class="bi bi-heart-pulse"></i>
                         Información
                     </h4>
                     @include('pacientes.paciente-acciones', ['paciente' => $paciente])

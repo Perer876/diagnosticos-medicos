@@ -54,8 +54,8 @@
                         <i class="bi bi-person-workspace"></i>
                         Medico
                     </h4>
-                    <a href="{{ route('medicos.edit', $user->id) }}" class="btn btn-primary btn-sm">
-                        <i class="bi bi-pen"></i>
+                    <a href="{{ route('medicos.edit', $user->id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                        <i class="bi bi-pencil-square link-secondary"></i>
                     </a>
                 </div>
                 <div class="card-content">
@@ -76,6 +76,40 @@
                 </div>
             </div>
         </div>
+        <div class="col-12 col-md-6">
+            <div class="card ">
+                <div class="card-header d-flex justify-content-between">
+                    <h4 class="card-title">
+                        <i class="bi bi-calendar2-event"></i>
+                        Citas
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="list-group">
+                            @foreach($user->citas()->with(['paciente.identificacion', 'estado'])->get() as $cita)
+                                <a href="{{ route('citas.show', $cita->id) }}" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">
+                                            <i class="bi bi-heart-pulse"></i>
+                                            {{ $cita->paciente->identificacion->nombre }}
+                                        </h5>
+                                        <small>
+                                            <x-estado-cita :cita="$cita"/>
+                                        </small>
+                                    </div>
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <small>{{ $cita->fecha->format('Y/m/d') }}</small>
+                                        <small>{{ $cita->hora->format('h:i A') }}</small>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         @endif
     </section>
 </x-app-layout>
+@include('plugins.tooltips')

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -19,6 +20,7 @@ use Laravel\Jetstream\HasProfilePhoto;
  * @property int $direccion_id
  * @property Direccion $direccion
  * @property Medico $medico
+ * @property Collection $citas
  */
 class User extends Authenticatable
 {
@@ -81,6 +83,16 @@ class User extends Authenticatable
         return $this->hasOne(Medico::class)->withDefault();
     }
 
+    public function citas()
+    {
+        return $this->hasMany(Cita::class);
+    }
+
+    /**
+     * Indica si el usuario tiene o no el rol especificado.
+     * @param $nombre
+     * @return bool
+     */
     public function tieneRol($nombre): bool
     {
         return Str::lower($this->rol->nombre) === Str::lower($nombre);

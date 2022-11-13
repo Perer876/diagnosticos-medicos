@@ -28,6 +28,9 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div>
+                                <h4 class="card-title text-center">
+                                    <i class="bi bi-heart-pulse"></i>
+                                </h4>
                                 <p class="card-text text-center mb-0">
                                     <small>Paciente</small>
                                 </p>
@@ -38,6 +41,9 @@
                                 </h4>
                             </div>
                             <div>
+                                <h4 class="card-title text-center">
+                                    <i class="bi bi-person-workspace"></i>
+                                </h4>
                                 <p class="card-text text-center mb-0">
                                     <small>Medico</small>
                                 </p>

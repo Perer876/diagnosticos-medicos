@@ -2,30 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cita;
-use App\Http\Requests\StoreCitaRequest;
-use App\Http\Requests\UpdateCitaRequest;
-use App\Models\EstadoCita;
-use App\Models\Paciente;
+use App\Http\Requests\{StoreCitaRequest, UpdateCitaRequest};
+use App\Models\{Cita, EstadoCita, Paciente};
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 
 class CitaController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Muestra un listado de todas la citas.
+     * @return Response
      */
-    public function index(Paciente $paciente)
+    public function index()
     {
-        dd($paciente);
+        $citas = Cita::all();
+        return view('citas.citas-index', compact('citas'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Muetra la vista para agendar una nueva cita para un paciente.
+     * @param Paciente $paciente
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create(Paciente $paciente)
     {
@@ -33,10 +32,9 @@ class CitaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreCitaRequest  $request
-     * @return \Illuminate\Http\Response
+     * Guarda una nueva cita para un paciente con los datos suministrados.
+     * @param StoreCitaRequest $request
+     * @return RedirectResponse
      */
     public function store(StoreCitaRequest $request, Paciente $paciente)
     {
@@ -51,10 +49,9 @@ class CitaController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cita  $cita
-     * @return \Illuminate\Http\Response
+     * Muestra una cita en concreto.
+     * @param Cita $cita
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Cita $cita)
     {
@@ -62,10 +59,9 @@ class CitaController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cita  $cita
-     * @return \Illuminate\Http\Response
+     * Muetsra la vista para editar una cita concreta.
+     * @param Cita $cita
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Cita $cita)
     {
@@ -74,11 +70,10 @@ class CitaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateCitaRequest  $request
-     * @param  \App\Models\Cita  $cita
-     * @return \Illuminate\Http\Response
+     * Actualiza los datos de una cita en concreto a partir de la request.
+     * @param UpdateCitaRequest $request
+     * @param Cita $cita
+     * @return RedirectResponse
      */
     public function update(UpdateCitaRequest $request, Cita $cita)
     {
@@ -95,10 +90,9 @@ class CitaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Cita  $cita
-     * @return \Illuminate\Http\Response
+     * Elimina de la base de datos la cita que se le indique.
+     * @param Cita $cita
+     * @return RedirectResponse
      */
     public function destroy(Cita $cita)
     {
@@ -107,6 +101,12 @@ class CitaController extends Controller
         return to_route('pacientes.show', $cita->paciente);
     }
 
+    /**
+     * Cambia solo el estado de una cita.
+     * @param Request $request
+     * @param Cita $cita
+     * @return RedirectResponse
+     */
     public function cambioEstado(Request $request, Cita $cita)
     {
         $validated = $request->validate([

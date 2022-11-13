@@ -49,7 +49,7 @@
                             <h6 class="dropdown-header">Hola, {{ strtok(Auth::user()->alias, " ") }}</h6>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('profile.show') }}">
+                            <a class="dropdown-item" href="{{ route('users.show', auth()->user()) }}">
                                 <i class="icon-mid bi bi-person me-2"></i>
                                 Mi Perfil
                             </a>

@@ -28,11 +28,16 @@ Route::resource('tratamientos', TratamientoController::class)->middleware('auth:
 Route::resource('pacientes', PacienteController::class)
     ->middleware('auth:sanctum');
 
+Route::get('citas', [CitaController::class, 'index'])
+    ->middleware('auth:sanctum')
+    ->name('citas.index');
+
 Route::patch('citas/{cita}/cambioEstado', [CitaController::class, 'cambioEstado'])
     ->middleware('auth:sanctum')
     ->name('citas.cambio-estado');
 
 Route::resource('pacientes.citas', CitaController::class)
+    ->except('index')
     ->middleware('auth:sanctum')
     ->shallow();
 

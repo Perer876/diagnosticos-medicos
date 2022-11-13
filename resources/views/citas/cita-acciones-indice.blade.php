@@ -1,4 +1,4 @@
-<div class="dropdown" tabindex="-1" x-data="{
+<div class="dropdown dropstart" tabindex="-1" x-data="{
     confirmDelete(form) {
         Swal.fire({
             icon: 'warning',
@@ -25,14 +25,15 @@
             <i class="bi bi-tag text-warning me-3"></i>
             Cambiar estado
         </button>
-        <a class="dropdown-item disabled" href="#">
-            <i class="bi bi-card-checklist text-info me-3"></i>
-            Evaluar
-        </a>
         <button class="dropdown-item" role="button" @click="confirmDelete($refs.delete_cita)">
             <i class="bi bi-trash text-danger me-3"></i>
             Eliminar
         </button>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{ route('citas.show', $cita) }}">
+            <i class="bi bi-info-lg text-secondary me-3"></i>
+            Detalle
+        </a>
     </div>
     <div class="modal fade text-left" id="modal-cambiar-estado-cita" tabindex="-1" role="dialog"
          aria-labelledby="modal-header-cambiar-estado-cita" aria-hidden="true">
