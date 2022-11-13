@@ -8,4 +8,7 @@
     <x-maz-sidebar-item name="Citas" :link="route('citas.index')" icon="bi bi-calendar2-event" />
     <x-maz-sidebar-item name="Tratamientos" :link="route('tratamientos.index')" icon="bi bi-capsule" />
     <x-maz-sidebar-item name="Especialidades" :link="route('especialidades.index')" icon="bi bi-file-earmark-medical" />
+    <x-maz-sidebar-item name="Pruebas Laboratorio" :link="route('pruebas_laboratorio.index')" icon="bi bi-journal-medical" />
+    <x-maz-sidebar-item name="Pruebas Post Mortem" :link="route('pruebas_post_mortem.index')" icon="bi bi-journal-medical" />
+    
 </x-maz-sidebar>
