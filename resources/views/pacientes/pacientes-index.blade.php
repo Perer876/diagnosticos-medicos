@@ -32,7 +32,7 @@
                             <th>Dirección</th>
                             <th>Sexo</th>
                             <th>Fecha nacimiento</th>
-                            <th>Acciones</th>
+                            <th class="text-center">Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,8 +45,8 @@
                                 </td>
                                 <td class="text-bold-500"><x-direccion :usuario="$paciente"/></td>
                                 <td>{{ $paciente->sexo->name }}</td>
-                                <td>{{ $paciente->fecha_nacimiento }}</td>
-                                <td>@include('pacientes.paciente-acciones', ['$paciente' => $paciente])</td>
+                                <td>{{ $paciente->fecha_nacimiento->format('Y/m/d') }}</td>
+                                <td class="text-center">@include('pacientes.paciente-acciones', ['$paciente' => $paciente])</td>
                             </tr>
                         @endforeach
                         </tbody>

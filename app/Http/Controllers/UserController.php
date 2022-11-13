@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $usuarios = User::with(['direccion', 'identificacion', 'rol'])->get();
+        $usuarios = User::with(['direccion' => ['pais', 'estado'], 'identificacion', 'rol'])->get();
 
         return view('users.users-index', compact('usuarios'));
     }

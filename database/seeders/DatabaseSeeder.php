@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             UserSeeder::class,
             EspecialidadSeeder::class,
+            PacienteSeeder::class,
+            EstadoCitaSeeder::class,
         ]);
     }
 }

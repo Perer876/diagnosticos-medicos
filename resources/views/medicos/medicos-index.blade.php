@@ -2,13 +2,13 @@
     <x-slot name="header">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Usuarios</h3>
-                <p class="text-subtitle text-muted">Administra tus usuarios</p>
+                <h3>Medicos</h3>
+                <p class="text-subtitle text-muted">Muestra los medicos que se encuentran regitrados</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <x-breadcrumb>
                     <x-breadcrumb.item value="Dashboard" href="{{route('dashboard')}}"/>
-                    <x-breadcrumb.item value="Usuarios" active/>
+                    <x-breadcrumb.item value="Medicos" active/>
                 </x-breadcrumb>
             </div>
         </div>
@@ -18,10 +18,6 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title">Listado</h4>
-                <a class="btn btn-success rounded-pill" href="{{route('users.create')}}">
-                    Nuevo usuario
-                    <i class="bi bi-person-plus"></i>
-                </a>
             </div>
             <div class="card-content">
                 <div class="table-responsive">
@@ -30,9 +26,9 @@
                         <tr>
                             <th>Alias</th>
                             <th>Nombre</th>
-                            <th>Rol</th>
                             <th>Dirección</th>
-                            <th class="text-center">Acciones</th>
+                            <th>Cédula</th>
+                            <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -42,13 +38,13 @@
                                     <a href="{{ route('users.show', $usuario) }}">{{ $usuario->alias }}</a>
                                 </td>
                                 <td class="text-bold-500">{{ $usuario->identificacion->nombre }}</td>
-                                <td>
-                                    <x-rol :usuario="$usuario"/>
-                                </td>
                                 <td class="text-bold-500">
                                     <x-direccion :usuario="$usuario"/>
                                 </td>
-                                <td class="text-center">
+                                <td>
+                                    <x-cedula :medico="$usuario->medico" />
+                                </td>
+                                <td>
                                     @include('users.user-actions', ['user' => $usuario])
                                 </td>
                             </tr>
@@ -56,7 +52,7 @@
                         </tbody>
                     </table>
                 @empty($usuarios->all())
-                    <div class="text-center p-5">No hay usuarios</div>
+                    <div class="text-center p-5">No hay medicos</div>
                 @endempty
                 </div>
             </div>

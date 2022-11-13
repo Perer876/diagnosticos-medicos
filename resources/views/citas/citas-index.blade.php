@@ -2,13 +2,13 @@
     <x-slot name="header">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Usuarios</h3>
-                <p class="text-subtitle text-muted">Administra tus usuarios</p>
+                <h3>Citas</h3>
+                <p class="text-subtitle text-muted">Ver las citas proximas</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <x-breadcrumb>
                     <x-breadcrumb.item value="Dashboard" href="{{route('dashboard')}}"/>
-                    <x-breadcrumb.item value="Usuarios" active/>
+                    <x-breadcrumb.item value="Citas" active/>
                 </x-breadcrumb>
             </div>
         </div>
@@ -18,46 +18,52 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title">Listado</h4>
-                <a class="btn btn-success rounded-pill" href="{{route('users.create')}}">
-                    Nuevo usuario
-                    <i class="bi bi-person-plus"></i>
-                </a>
             </div>
             <div class="card-content">
                 <div class="table-responsive">
                     <table class="table align-middle table-lg mb-0 ">
                         <thead>
                         <tr>
-                            <th>Alias</th>
-                            <th>Nombre</th>
-                            <th>Rol</th>
-                            <th>Dirección</th>
+                            <th>Paciente</th>
+                            <th>Medico</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Estado</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($usuarios as $usuario)
+                        @foreach($citas as $cita)
                             <tr>
                                 <td class="text-bold-500">
-                                    <a href="{{ route('users.show', $usuario) }}">{{ $usuario->alias }}</a>
-                                </td>
-                                <td class="text-bold-500">{{ $usuario->identificacion->nombre }}</td>
-                                <td>
-                                    <x-rol :usuario="$usuario"/>
+                                    <a href="{{ route('pacientes.show', $cita->paciente) }}">
+                                        {{ $cita->paciente->identificacion->nombre }}
+                                    </a>
                                 </td>
                                 <td class="text-bold-500">
-                                    <x-direccion :usuario="$usuario"/>
+                                    <a href="{{ route('users.show', $cita->user) }}">
+                                        {{ $cita->user->identificacion->nombre }}
+                                    </a>
+                                </td>
+                                <td>
+                                    {{ $cita->fecha->format('Y/m/d') }}
+                                </td>
+                                <td>
+                                    {{ $cita->hora->format('h:i A') }}
+                                </td>
+                                <td>
+                                    <x-estado-cita :cita="$cita" />
                                 </td>
                                 <td class="text-center">
-                                    @include('users.user-actions', ['user' => $usuario])
+                                    @include('citas.cita-acciones-indice', ['cita' => $cita])
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
-                @empty($usuarios->all())
-                    <div class="text-center p-5">No hay usuarios</div>
-                @endempty
+                    @empty($citas->all())
+                        <div class="text-center p-5">No hay citas</div>
+                    @endempty
                 </div>
             </div>
         </div>
