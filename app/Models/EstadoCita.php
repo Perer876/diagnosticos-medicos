@@ -28,4 +28,13 @@ class EstadoCita extends Model
     {
         return $this->hasMany(Cita::class, 'estado_cita_id');
     }
+
+    /**
+     * Regresa el id del estado que se indique.
+     * @return int|mixed
+     */
+    public static function id(string $nombre)
+    {
+        return static::where('nombre', '=', $nombre)->first('id')->id ?? null;
+    }
 }

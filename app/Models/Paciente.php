@@ -27,6 +27,7 @@ class Paciente extends Model
     protected $guarded = [];
 
     protected $casts = [
+        'fecha_nacimiento' => 'date',
         'sexo' => Sexos::class,
     ];
 

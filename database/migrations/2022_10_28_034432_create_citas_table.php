@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('fecha');
             $table->time('hora');
             $table->foreignId('estado_cita_id')->constrained('estados_cita');
-            $table->foreignId('medico_id')->constrained('medicos');
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('paciente_id')->constrained('pacientes');
             $table->timestamps();
         });
