@@ -1,6 +1,10 @@
 <h1 align="center">Diagnósticos Medicos</h1>
 <p align="center">Proyecto escolar donde desarrollaremos un sistema que administre un consultorio médico / hospital y podamos, con un sistema experto, ser de apoyo a medicos dándoles una sugerencia de lo que podría padecer un paciente según sus síntomas y signos.</p>
 
+## Requerimientos
+* `PHP` >= 8.1
+* `Node` >= v14.16.1
+
 ## Instalación
 1. Clonar el proyecto
     ```bash
