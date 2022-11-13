@@ -26,8 +26,8 @@
             <div class="card-content">
                 <div class="card-body">
                     <div class="accordion" id="acordionEspecialidades">
-                        <div class="accordion-item">
                         @foreach($especialidades as $especialidad)
+                        <div class="accordion-item" id="{{ Str::slug($especialidad->nombre) }}">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEspecialidad{{ $especialidad->id }}" aria-expanded="false" aria-controls="collapseEspecialidad{{ $especialidad->id }}">
                                     <span class="fs-5 fw-bolder">{{ $especialidad->nombre }}</span>
@@ -39,8 +39,8 @@
                                     <div class="text-end">@include('especialidades.especialidad-acciones', ['id' => $especialidad->id])</div>
                                 </div>
                             </div>
-                        @endforeach
                         </div>
+                        @endforeach
                     </div>
                     @empty($especialidades->all())
                         <div class="text-center p-3">No hay especialidades registradas</div>

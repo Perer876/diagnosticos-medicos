@@ -12,8 +12,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property $fecha
  * @property $hora
- * @property int $medico_id
- * @property Medico $medico
+ * @property string $motivo
+ * @property int $user_id ID del medico
+ * @property User $user medico
  * @property int $paciente_id
  * @property Paciente $paciente
  * @property Collection $evaluaciones
@@ -26,9 +27,14 @@ class Cita extends Model
 
     protected $guarded = [];
 
-    public function medico()
+    protected $casts = [
+        'fecha' => 'date',
+        'hora' => 'datetime'
+    ];
+
+    public function user()
     {
-        return $this->belongsTo(Medico::class);
+        return $this->belongsTo(User::class);
     }
 
     public function paciente()

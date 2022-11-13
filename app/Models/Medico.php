@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $user_id
  * @property User $user
  * @property Collection $especialidades
- * @property Collection $citas
  */
 class Medico extends Model
 {
@@ -30,10 +29,5 @@ class Medico extends Model
     public function especialidades()
     {
         return $this->belongsToMany(Especialidad::class);
-    }
-
-    public function citas()
-    {
-        return $this->hasMany(Cita::class);
     }
 }

@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('medicos', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->char('cedula', 8)->nullable();
-            $table->timestamps();
+        Schema::table('citas', function (Blueprint $table) {
+            $table->string('motivo')->nullable()->after('hora');
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medicos');
+        Schema::table('citas', function (Blueprint $table) {
+            $table->dropColumn('motivo');
+        });
     }
 };
