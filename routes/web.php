@@ -1,10 +1,10 @@
 <?php
-
-use App\Http\Controllers\CitaController;
-use App\Http\Controllers\EspecialidadController;
-use App\Http\Controllers\MedicoController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\CitaController;
+use App\Http\Controllers\EnfermedadController;
+use App\Http\Controllers\EspecialidadController;
+use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\SintomaController;
 use App\Http\Controllers\SignoController;
 use App\Http\Controllers\UserController;
@@ -16,6 +16,33 @@ Route::get('/',  fn() => redirect('dashboard'));
 Route::middleware(['auth:sanctum', 'verified'])
     ->get('/dashboard', fn () => view('dashboard'))
     ->name('dashboard');
+
+
+Route::get('enfermedades/{enfermedade}/editTratamiento', [EnfermedadController::class, 'editTratamiento'])
+    ->middleware('auth:sanctum')
+    ->name('enfermedades.edit-tratamiento');
+
+Route::patch('enfermedades/{enfermedade}/updateTratamiento', [EnfermedadController::class, 'updateTratamiento'])
+->middleware('auth:sanctum')
+->name('enfermedades.update-tratamiento');
+
+Route::get('enfermedades/{enfermedade}/editSigno', [EnfermedadController::class, 'editSigno'])
+    ->middleware('auth:sanctum')
+    ->name('enfermedades.edit-signo');
+
+Route::patch('enfermedades/{enfermedade}/updateSigno', [EnfermedadController::class, 'updateSigno'])
+->middleware('auth:sanctum')
+->name('enfermedades.update-signo');
+
+Route::get('enfermedades/{enfermedade}/editSintoma', [EnfermedadController::class, 'editSintoma'])
+    ->middleware('auth:sanctum')
+    ->name('enfermedades.edit-sintoma');
+
+Route::patch('enfermedades/{enfermedade}/updateSintoma', [EnfermedadController::class, 'updateSintoma'])
+->middleware('auth:sanctum')
+->name('enfermedades.update-sintoma');
+
+Route::resource('enfermedades', EnfermedadController::class)->middleware('auth:sanctum');
 
 Route::resource('users', UserController::class)->middleware('auth:sanctum');
 
