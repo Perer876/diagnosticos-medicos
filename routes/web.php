@@ -9,7 +9,6 @@ use App\Http\Controllers\SintomaController;
 use App\Http\Controllers\SignoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PacienteController;
-<<<<<<< routes/web.php
 use App\Http\Controllers\PruebaLaboratorioController;
 use App\Http\Controllers\PruebaPostMortemController;
 use App\Http\Controllers\TratamientoController;
