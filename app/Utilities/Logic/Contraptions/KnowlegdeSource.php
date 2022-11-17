@@ -5,17 +5,9 @@ namespace App\Utilities\Logic\Contraptions;
 abstract class KnowlegdeSource
 {
     /**
-     * @return Fact[]
+     * @return array<Fact|Rule>
      */
-    public static function facts(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return Rule[]
-     */
-    public static function rules(): array
+    public static function get(): array
     {
         return [];
     }

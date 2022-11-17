@@ -14,14 +14,9 @@ class Fact
      */
     public array $value;
 
-    public function __construct(...$values)
+    public function __construct(string $relation, mixed ...$values)
     {
-        $this->relation = get_class($this);
+        $this->relation = $relation;
         $this->value = $values;
-    }
-
-    public static function is(...$values): static
-    {
-        return new static(...$values);
     }
 }

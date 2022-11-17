@@ -20,31 +20,35 @@ class Rule
     /**
      * @param mixed ...$values
      */
-    public function __construct(...$values)
+    public function __construct(string $relation, ...$values)
     {
-        $this->conclusion = new Fact(...$values);
-        $this->conclusion->relation = get_class($this);
+        $this->conclusion = new Fact($relation, ...$values);
         $this->premises = new FactManager();
     }
 
     /**
-     * Declará los valores de la conclusion.
-     * @param ...$values
-     * @return static
+     * Declara las premisas que tiene que cumplise para que se cumpla la conclusion.
+     * @param Fact|Rule ...$premises
+     * @return $this
      */
-    public static function is(...$values): static
+    public function if(Fact|Rule ...$premises): static
     {
-        return new static(...$values);
+        foreach ($premises as $premise) {
+            if ($premise instanceof Fact) {
+                $this->premises->add($premise);
+            } else {
+                $this->premises->add($premise->conclusion);
+            }
+        }
+        return $this;
     }
 
     /**
-     * Declara las premisas que tiene que cumplise para que se cumpla la conclusion.
-     * @param ...$premises
-     * @return $this
+     * Si no se tienen premisas entonces la regla se puede tratar como un hecho.
+     * @return bool
      */
-    public function if(...$premises): static
+    public function isAFact(): bool
     {
-        $this->premises->add(...$premises);
-        return $this;
+        return empty($this->premises->get());
     }
 }

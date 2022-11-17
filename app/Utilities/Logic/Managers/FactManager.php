@@ -35,14 +35,12 @@ class FactManager
     }
 
     /**
-     * Agrega uno o varios hechos.
-     * @param Fact $fact
+     * Agrega varios hechos.
      * @param Fact ...$facts
      * @return void
      */
-    public function add(Fact $fact, Fact ...$facts): void
+    public function add(Fact ...$facts): void
     {
-        $this->addOne($fact);
         foreach ($facts as $fact) {
             $this->addOne($fact);
         }
@@ -60,6 +58,8 @@ class FactManager
             return $this->facts;
         }
 
+        $relation = basename($relation);
+
         if (key_exists($relation, $this->facts)) {
             return $this->facts[$relation];
         }
@@ -73,7 +73,7 @@ class FactManager
      */
     protected function removeRelation(string $relation): void
     {
-        unset($this->facts[$relation]);
+        unset($this->facts[basename($relation)]);
     }
 
     /**

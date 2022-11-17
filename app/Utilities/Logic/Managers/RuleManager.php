@@ -40,14 +40,12 @@ class RuleManager
     }
 
     /**
-     * Agrega una o varias reglas.
-     * @param Rule $rule
+     * Agrega varias reglas.
      * @param Rule ...$rules
      * @return void
      */
-    public function add(Rule $rule, Rule ...$rules): void
+    public function add(Rule ...$rules): void
     {
-        $this->addOne($rule);
         foreach ($rules as $rule) {
             $this->addOne($rule);
         }
@@ -64,6 +62,8 @@ class RuleManager
             return $this->rules;
         }
 
+        $relation = basename($relation);
+
         if (key_exists($relation, $this->rules)) {
             return $this->rules[$relation];
         }
@@ -77,7 +77,7 @@ class RuleManager
      */
     protected function removeRelation(string $relation): void
     {
-        unset($this->rules[$relation]);
+        unset($this->rules[basename($relation)]);
     }
 
     /**
