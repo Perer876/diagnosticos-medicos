@@ -9,7 +9,6 @@ use App\Http\Controllers\SintomaController;
 use App\Http\Controllers\SignoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PacienteController;
-<<<<<<< routes/web.php
 use App\Http\Controllers\PruebaLaboratorioController;
 use App\Http\Controllers\PruebaPostMortemController;
 use App\Http\Controllers\TratamientoController;
@@ -44,6 +43,22 @@ Route::get('enfermedades/{enfermedade}/editSintoma', [EnfermedadController::clas
 Route::patch('enfermedades/{enfermedade}/updateSintoma', [EnfermedadController::class, 'updateSintoma'])
 ->middleware('auth:sanctum')
 ->name('enfermedades.update-sintoma');
+
+Route::get('enfermedades/{enfermedade}/editPruebaLaboratorio', [EnfermedadController::class, 'editPruebaLaboratorio'])
+    ->middleware('auth:sanctum')
+    ->name('enfermedades.edit-prueba-laboratorio');
+
+Route::patch('enfermedades/{enfermedade}/updatePruebaLaboratorio', [EnfermedadController::class, 'updatePruebaLaboratorio'])
+->middleware('auth:sanctum')
+->name('enfermedades.update-prueba-laboratorio');
+
+Route::get('enfermedades/{enfermedade}/editPruebaPostMortem', [EnfermedadController::class, 'editPruebaPostMortem'])
+    ->middleware('auth:sanctum')
+    ->name('enfermedades.edit-prueba-post-mortem');
+
+Route::patch('enfermedades/{enfermedade}/updatePruebaPostMortem', [EnfermedadController::class, 'updatePruebaPostMortem'])
+->middleware('auth:sanctum')
+->name('enfermedades.update-prueba-post-mortem');
 
 Route::resource('enfermedades', EnfermedadController::class)->middleware('auth:sanctum');
 

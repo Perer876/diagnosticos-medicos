@@ -110,6 +110,52 @@
                 </div>
             </div>
         </div> 
+        <div class="col-12 col-md-6">
+            <div class="card ">
+                <div class="card-header d-flex justify-content-between">
+                    <h4 class="card-title">
+                        <i class="bi bi-clipboard2-pulse"></i>
+                        Pruebas de laboratorio y post mortem
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="list-group">
+                            <span class="card-text">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="card-subtitle">Pruebas de laboratorio</h6>
+                                    <a href="{{ route('enfermedades.edit-prueba-laboratorio', $enfermedade->id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                                        <i class="bi bi-pencil-square link-secondary"></i>
+                                    </a>
+                                </div>                        
+                                <p>
+                                @forelse($enfermedade->pruebasLaboratorio()->pluck('nombre') as $prueba)
+                                    <span class="badge bg-light-warning mb-2 me-1">{{ $prueba }}</span>
+                                @empty
+                                    <span class="fst-italic">Sin pruebas</span>
+                                @endforelse
+                                </p>
+                            </span> 
+                            <span class="card-text">                        
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="card-subtitle">Pruebas post mortem</h6>
+                                    <a href="{{ route('enfermedades.edit-prueba-post-mortem', $enfermedade->id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                                        <i class="bi bi-pencil-square link-secondary"></i>
+                                    </a>
+                                </div>  
+                                <p>
+                                @forelse($enfermedade->pruebasPostMortem()->pluck('nombre') as $prueba)
+                                    <span class="badge bg-light-warning mb-2 me-1">{{ $prueba }}</span>
+                                @empty
+                                    <span class="fst-italic">Sin pruebas</span>
+                                @endforelse
+                                </p>
+                            </span>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </x-app-layout>
 @include('plugins.tooltips')

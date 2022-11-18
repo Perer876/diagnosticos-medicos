@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEnfermedadRequest;
+use App\Http\Requests\UpdateEnfermedadPruebaLaboratorioRequest;
+use App\Http\Requests\UpdateEnfermedadPruebaPostMortemRequest;
 use App\Http\Requests\UpdateEnfermedadRequest;
 use App\Http\Requests\UpdateEnfermedadSignoRequest;
 use App\Http\Requests\UpdateEnfermedadSintomaRequest;
@@ -128,6 +130,30 @@ class EnfermedadController extends Controller
     public function updateSintoma(UpdateEnfermedadSintomaRequest $request, Enfermedad $enfermedade)
     {
         $enfermedade->sintomas()->sync($request->input('sintomas', []));
+
+        return redirect()->route('enfermedades.show', $enfermedade);
+    }
+
+    public function editPruebaLaboratorio(Enfermedad $enfermedade)
+    {
+        return view('enfermedades.enfermedades-form-prueba-laboratorio', compact('enfermedade'));
+    }
+
+    public function updatePruebaLaboratorio(UpdateEnfermedadPruebaLaboratorioRequest $request, Enfermedad $enfermedade)
+    {
+        $enfermedade->pruebasLaboratorio()->sync($request->input('pruebas', []));
+
+        return redirect()->route('enfermedades.show', $enfermedade);
+    }
+
+    public function editPruebaPostMortem(Enfermedad $enfermedade)
+    {
+        return view('enfermedades.enfermedades-form-prueba-post-mortem', compact('enfermedade'));
+    }
+
+    public function updatePruebaPostMortem(UpdateEnfermedadPruebaPostMortemRequest $request, Enfermedad $enfermedade)
+    {
+        $enfermedade->pruebasPostMortem()->sync($request->input('pruebas', []));
 
         return redirect()->route('enfermedades.show', $enfermedade);
     }
