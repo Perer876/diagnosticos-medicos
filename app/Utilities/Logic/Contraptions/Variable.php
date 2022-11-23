@@ -4,5 +4,10 @@ namespace App\Utilities\Logic\Contraptions;
 
 class Variable
 {
-    public ?array $value = null;
+    public string $name;
+
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
 }

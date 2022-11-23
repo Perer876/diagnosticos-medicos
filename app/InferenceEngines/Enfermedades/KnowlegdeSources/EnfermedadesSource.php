@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Utilities\Logic\Implementations\KnowlegdeSources;
+namespace App\InferenceEngines\Enfermedades\KnowlegdeSources;
 
+use App\InferenceEngines\Enfermedades\Relations\Enfermedad;
+use App\InferenceEngines\Enfermedades\Relations\Signo;
+use App\InferenceEngines\Enfermedades\Relations\Sintoma;
 use App\Utilities\Logic\Contraptions\KnowlegdeSource;
-use App\Utilities\Logic\Implementations\Relations\Enfermedad;
-use App\Utilities\Logic\Implementations\Relations\Signo;
-use App\Utilities\Logic\Implementations\Relations\Sintoma;
 
 class EnfermedadesSource extends KnowlegdeSource
 {

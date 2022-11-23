@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utilities\Logic\Implementations\Relations;
+namespace App\InferenceEngines\Enfermedades\Relations;
 
 use App\Utilities\Logic\Contraptions\Relation;
 
