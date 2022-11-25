@@ -19,7 +19,7 @@ class Resolver
 
     public function get(Fact $goal)
     {
-        $related = $this->rules->get($goal->relation);
+
 
 
 

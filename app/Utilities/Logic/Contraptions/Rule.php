@@ -12,10 +12,10 @@ class Rule
     public Fact $conclusion;
 
     /**
-     * @var FactManager Lista de premisas que se tienen que cumplir para que
+     * @var Fact[] Lista de premisas que se tienen que cumplir para que
      * la conclusion sea verdadera.
      */
-    public FactManager $premises;
+    public array $premises = [];
 
     /**
      * @param mixed ...$values
@@ -23,7 +23,6 @@ class Rule
     public function __construct(string $relation, ...$values)
     {
         $this->conclusion = new Fact($relation, ...$values);
-        $this->premises = new FactManager();
     }
 
     /**
@@ -35,9 +34,9 @@ class Rule
     {
         foreach ($premises as $premise) {
             if ($premise instanceof Fact) {
-                $this->premises->add($premise);
+                $this->premises[] = $premise;
             } else {
-                $this->premises->add($premise->conclusion);
+                $this->premises[] = $premise->conclusion;
             }
         }
         return $this;
@@ -49,6 +48,6 @@ class Rule
      */
     public function isAFact(): bool
     {
-        return empty($this->premises->get());
+        return empty($this->premises);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Utilities\Logic\Contraptions;
 
 use App\Utilities\Logic\Managers\FactManager;
 use App\Utilities\Logic\Managers\RuleManager;
+use App\Utilities\Logic\Unification;
 
 class InferenceEngine
 {
@@ -122,12 +123,85 @@ class InferenceEngine
         }
     }
 
+    public function infer(Fact $clause): array
+    {
+        $results = [];
+
+        foreach ($this->facts->get($clause->relation) as $factValues) {
+            $fact = new Fact($clause->relation, ...$factValues);
+
+            $S = Unification::unify($clause, $fact);
+
+            if ($S !== false) {
+                $results[] = $S;
+            }
+        }
+
+        foreach($this->rules->get($clause->relation) as [$value, $premises]) {
+            $rule = new Rule($clause->relation, ...$value);
+            $rule->if(...$premises);
+
+            $results = [
+                ...$results,
+                ...$this->inferences($clause, $rule)
+            ];
+        }
+
+        return $results;
+    }
+
+    protected function inferences(Fact $goal, Rule $rule): array
+    {
+        $S = Unification::unify($goal, $rule->conclusion);
+
+        if ($S === false) {
+            return [];
+        }
+
+        $combinations = [$S];
+        foreach ($rule->premises as $premise) {
+            $c = [];
+            foreach ($combinations as $combination) {
+                $clause = $premise->apply($combination);
+                $results = $this->infer($clause);
+
+
+                if (empty($results)) {
+                    return [];
+                }
+
+                foreach ($results as $result) {
+                    $c[] = [
+                        ...$combination,
+                        ...$result
+                    ];
+                }
+            }
+            $combinations = $c;
+        }
+
+        return $combinations;
+    }
+
     public function query(Fact|Rule $clause)
     {
         if ($clause instanceof Rule) {
             $clause = $clause->conclusion;
         }
 
-        // TODO
+        $results = $this->infer($clause);
+
+        if (empty($results)) {
+            return false;
+        }
+
+        // TODO Terminar de interpretar los resultados
+
+        $userResults = [];
+
+        foreach ($results as $result) {
+
+        }
+
     }
 }

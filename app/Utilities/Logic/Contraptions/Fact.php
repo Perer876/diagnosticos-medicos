@@ -2,6 +2,8 @@
 
 namespace App\Utilities\Logic\Contraptions;
 
+use App\Utilities\Logic\Unification;
+
 class Fact
 {
     /**
@@ -18,5 +20,21 @@ class Fact
     {
         $this->relation = $relation;
         $this->value = $values;
+    }
+
+    public function apply(array $S): static
+    {
+        $newFact = new static($this->relation);
+
+        foreach ($this->value as $value) {
+            $sub = Unification::replacement($S, $value);
+            if ($sub === null) {
+                $newFact->value[] = $value;
+            } else {
+                $newFact->value[] = $sub;
+            }
+        }
+
+        return $newFact;
     }
 }

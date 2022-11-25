@@ -54,8 +54,8 @@ class CriminalSource extends KnowlegdeSource
             ),
             Hostile::is($p)->if(
                 Enemy::is($p, "America"),
-                Enemy::is("A", "America")
             ),
+            Enemy::is("A", "America"),
             American::is("Robert")
         ];
     }

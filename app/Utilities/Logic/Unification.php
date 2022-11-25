@@ -82,10 +82,23 @@ class Unification
     {
         foreach ($array as $key => $sentence) {
             foreach ($sentence as $pos => $termToCompare) {
-                if ($termToCompare == $term) {
+                if ($termToCompare === $term) {
                     $array[$key][$pos] = $withTerm;
                 }
             }
         }
+    }
+
+    public static function replacement($S, $term)
+    {
+        foreach ($S as $sub) {
+            [$left, $right] = $sub;
+            if ($left === $term) {
+                return $right;
+            } elseif ($right instanceof Variable && $right === $term) {
+                return $left;
+            }
+        }
+        return null;
     }
 }
