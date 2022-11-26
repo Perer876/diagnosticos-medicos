@@ -89,7 +89,13 @@ class Unification
         }
     }
 
-    public static function replacement($S, $term)
+    /**
+     * Devuelve el remplazo de un término en una substitucion.
+     * @param $S
+     * @param $term
+     * @return mixed|null
+     */
+    public static function replacement($S, $term): mixed
     {
         foreach ($S as $sub) {
             [$left, $right] = $sub;

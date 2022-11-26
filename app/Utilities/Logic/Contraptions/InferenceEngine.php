@@ -5,6 +5,7 @@ namespace App\Utilities\Logic\Contraptions;
 use App\Utilities\Logic\Managers\FactManager;
 use App\Utilities\Logic\Managers\RuleManager;
 use App\Utilities\Logic\Unification;
+use Generator;
 
 class InferenceEngine
 {
@@ -123,17 +124,20 @@ class InferenceEngine
         }
     }
 
-    public function infer(Fact $clause): array
+    /**
+     * Infiere un hecho. Devuelve un generador de los hechos validos.
+     * @param Fact $clause
+     * @return Generator
+     */
+    protected function infer(Fact $clause): Generator
     {
-        $results = [];
-
         foreach ($this->facts->get($clause->relation) as $factValues) {
             $fact = new Fact($clause->relation, ...$factValues);
 
             $S = Unification::unify($clause, $fact);
 
             if ($S !== false) {
-                $results[] = $S;
+                yield $S;
             }
         }
 
@@ -141,15 +145,16 @@ class InferenceEngine
             $rule = new Rule($clause->relation, ...$value);
             $rule->if(...$premises);
 
-            $results = [
-                ...$results,
-                ...$this->inferences($clause, $rule)
-            ];
+            yield from $this->inferences($clause, $rule);
         }
-
-        return $results;
     }
 
+    /**
+     * Infiere los posibles hechos de la meta a partir de una regla dada.
+     * @param Fact $goal
+     * @param Rule $rule
+     * @return array
+     */
     protected function inferences(Fact $goal, Rule $rule): array
     {
         $S = Unification::unify($goal, $rule->conclusion);
@@ -158,13 +163,14 @@ class InferenceEngine
             return [];
         }
 
-        $combinations = [$S];
+        $substitutions = [$S];
+
         foreach ($rule->premises as $premise) {
             $c = [];
-            foreach ($combinations as $combination) {
-                $clause = $premise->apply($combination);
-                $results = $this->infer($clause);
 
+            foreach ($substitutions as $substitution) {
+                $clause = $premise->apply($substitution);
+                $results = $this->infer($clause);
 
                 if (empty($results)) {
                     return [];
@@ -172,18 +178,24 @@ class InferenceEngine
 
                 foreach ($results as $result) {
                     $c[] = [
-                        ...$combination,
+                        ...$substitution,
                         ...$result
                     ];
                 }
+
             }
-            $combinations = $c;
+            $substitutions = $c;
         }
 
-        return $combinations;
+        return $substitutions;
     }
 
-    public function query(Fact|Rule $clause)
+    /**
+     * Consulta
+     * @param Fact|Rule $clause
+     * @return Generator
+     */
+    public function query(Fact|Rule $clause): Generator
     {
         if ($clause instanceof Rule) {
             $clause = $clause->conclusion;
@@ -191,17 +203,8 @@ class InferenceEngine
 
         $results = $this->infer($clause);
 
-        if (empty($results)) {
-            return false;
-        }
-
-        // TODO Terminar de interpretar los resultados
-
-        $userResults = [];
-
         foreach ($results as $result) {
-
+            yield $clause->apply($result);
         }
-
     }
 }

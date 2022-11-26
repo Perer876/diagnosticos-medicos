@@ -12,9 +12,6 @@ class EnfermedadesSource extends KnowlegdeSource
     public static function get(): array
     {
         return [
-            Signo::is('Latidos cardiacos rapidos'),
-            Sintoma::is('Insomnio'),
-
             Enfermedad::is('Leucemia')->if(
                 Signo::is('Sensación de cansancio'),
                 Sintoma::is('Fiebre'),

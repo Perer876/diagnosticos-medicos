@@ -35,6 +35,9 @@ class CriminalSource extends KnowlegdeSource
         $p = new Variable('P');
         $q = new Variable('Q');
         $r = new Variable('R');
+        $m = new Variable('M');
+        $w = new Variable('W');
+        $e = new Variable('E');
 
         return [
             Criminal::is($p)->if(
@@ -45,15 +48,15 @@ class CriminalSource extends KnowlegdeSource
             ),
             Owns::is("A", "T1"),
             Missile::is("T1"),
-            Sells::is("Robert", $p, "A")->if(
-                Missile::is($p),
-                Owns::is("A", $p)
+            Sells::is("Robert", $m, "A")->if(
+                Missile::is($m),
+                Owns::is("A", $m)
             ),
-            Weapon::is($p)->if(
-                Missile::is($p)
+            Weapon::is($w)->if(
+                Missile::is($w)
             ),
-            Hostile::is($p)->if(
-                Enemy::is($p, "America"),
+            Hostile::is($e)->if(
+                Enemy::is($e, "America"),
             ),
             Enemy::is("A", "America"),
             American::is("Robert")

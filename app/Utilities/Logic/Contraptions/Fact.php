@@ -22,6 +22,11 @@ class Fact
         $this->value = $values;
     }
 
+    /**
+     * Aplica una substitucion al hecho
+     * @param array $S
+     * @return $this
+     */
     public function apply(array $S): static
     {
         $newFact = new static($this->relation);
