@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{StoreCitaRequest, UpdateCitaRequest};
-use App\Models\{Cita, EstadoCita, Paciente};
+use App\Http\Requests\{StoreCitaEvaluacionRequest, StoreCitaRequest, UpdateCitaRequest};
+use App\Models\{Cita, EstadoCita, Evaluacion, Paciente};
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -116,6 +116,46 @@ class CitaController extends Controller
         $cita->estado_cita_id = $validated['estado_cita'];
         $cita->save();
 
+        return to_route('citas.show', $cita);
+    }
+
+    public function evaluar(Cita $cita)
+    {
+        return view('citas.cita-evaluar', compact('cita'));
+    }
+
+    public function evaluarStore(StoreCitaEvaluacionRequest $request, Cita $cita)
+    {
+        $evaluacion = $cita->evaluacion()->create([
+            'enfermedad_id' => null,
+        ]);
+        $evaluacion->sintomas()->sync($request->input('sintomas', []));
+        $evaluacion->signos()->sync($request->input('signos', []));
+
+        return to_route('citas.evaluacion.show', [$cita, $evaluacion]);
+    }
+
+    public function evaluacionShow(Cita $cita, Evaluacion $evaluacion)
+    {
+        return view('citas.cita-evaluacion-show', compact('cita', 'evaluacion'));
+    }
+
+    public function evaluacionEdit(Cita $cita, Evaluacion $evaluacion)
+    {
+        return view('citas.cita-evaluar', compact('cita', 'evaluacion'));
+    }
+
+    public function evaluacionUpdate(Cita $cita, Evaluacion $evaluacion, StoreCitaEvaluacionRequest $request)
+    {
+        $evaluacion->sintomas()->sync($request->input('sintomas', []));
+        $evaluacion->signos()->sync($request->input('signos', []));
+
+        return to_route('citas.evaluacion.show', [$cita, $evaluacion]);
+    }
+
+    public function evaluacionDestroy(Cita $cita, Evaluacion $evaluacion)
+    {
+        $evaluacion->delete();
         return to_route('citas.show', $cita);
     }
 }

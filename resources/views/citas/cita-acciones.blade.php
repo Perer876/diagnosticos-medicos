@@ -25,10 +25,18 @@
             <i class="bi bi-tag text-warning me-3"></i>
             Cambiar estado
         </button>
-        <a class="dropdown-item disabled" href="#">
-            <i class="bi bi-card-checklist text-info me-3"></i>
-            Evaluar
-        </a>
+        @if (isset($cita->evaluacion))
+            <a class="dropdown-item shadow" href="{{ route('citas.evaluacion.show', ['cita' => $cita->id, 'evaluacion' => $cita->evaluacion->id]) }}">
+                <i class="bi bi-card-checklist text-info me-3"></i>
+                Evaluacion
+            </a>
+        @else
+            <a class="dropdown-item shadow" href="{{ route('citas.evaluar', $cita->id) }}">
+                <i class="bi bi-card-checklist text-info me-3"></i>
+                Evaluar
+            </a>            
+        @endif
+        
         <button class="dropdown-item" role="button" @click="confirmDelete($refs.delete_cita)">
             <i class="bi bi-trash text-danger me-3"></i>
             Eliminar

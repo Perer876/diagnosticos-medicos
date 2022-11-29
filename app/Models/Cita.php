@@ -42,9 +42,9 @@ class Cita extends Model
         return $this->belongsTo(Paciente::class);
     }
 
-    public function evaluaciones()
+    public function evaluacion()
     {
-        return $this->hasMany(Evaluacion::class);
+        return $this->hasOne(Evaluacion::class);
     }
 
     public function estado()
