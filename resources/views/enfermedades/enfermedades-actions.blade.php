@@ -21,13 +21,13 @@
             <i class="bi bi-pencil text-primary me-3"></i>
             Editar
         </a>
-        <button class="dropdown-item" role="button">
+        <button class="dropdown-item" role="button" @click="confirmDelete($refs.delete_enfermedad)">
             <i class="bi bi-trash text-danger me-3"></i>
             Eliminar
         </button>
     </div>
 
-    <form action="{{route('enfermedades.destroy', $enfermedade->id)}}" method="post">
+    <form action="{{route('enfermedades.destroy', $enfermedade->id)}}" method="post" x-ref="delete_enfermedad">
         @method('DELETE')
         @csrf
     </form>
