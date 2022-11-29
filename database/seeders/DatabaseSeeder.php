@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
             EspecialidadSeeder::class,
             PacienteSeeder::class,
             EstadoCitaSeeder::class,
+            SintomaSeeder::class,
+            SignoSeeder::class,
+            TratamientoSeeder::class,
         ]);
     }
 }
