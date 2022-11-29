@@ -60,9 +60,16 @@
                                 "
                                 >
                                 @foreach(\App\Models\Sintoma::pluck('nombre', 'id') as $id => $nombre)
+                                @if (isset($evaluacion))
                                     <option value="{{ $id }}" @selected($evaluacion->sintomas->contains($id))>
                                         {{ $nombre }}
                                     </option>
+                                @else
+                                    <option value="{{ $id }}">
+                                        {{ $nombre }}
+                                    </option>
+                                @endif
+                                    
                                 @endforeach
                             </select>
 
@@ -92,9 +99,16 @@
                                 "
                                 >
                                 @foreach(\App\Models\Signo::pluck('nombre', 'id') as $id => $nombre)
-                                    <option value="{{ $id }}" @selected($evaluacion->signos->contains($id))>
-                                        {{ $nombre }}
-                                    </option>
+                                    @if (isset($evaluacion))
+                                        <option value="{{ $id }}" @selected($evaluacion->signos->contains($id))>
+                                            {{ $nombre }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $id }}">
+                                            {{ $nombre }}
+                                        </option>
+                                    @endif
+                                    
                                 @endforeach
                             </select>
                             
