@@ -36,9 +36,6 @@ class SintomaSeeder extends Seeder
         Sintoma::create(['nombre' => 'Dolor en articulaciones',]);
         Sintoma::create(['nombre' => 'Dolor en el talón',]);
         Sintoma::create(['nombre' => 'Pérdida de apetito',]);
-        Sintoma::create(['nombre' => 'Pérdida de apetito',]);
-        Sintoma::create(['nombre' => 'Pérdida de apetito',]);
-        Sintoma::create(['nombre' => 'Pérdida de apetito',]);
-        Sintoma::create(['nombre' => 'Picazón ojos',]);        
+        Sintoma::create(['nombre' => 'Picazón ojos',]);
     }
 }

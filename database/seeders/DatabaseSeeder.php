@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Especialidad;
+use App\Models\PruebaLaboratorio;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
             SintomaSeeder::class,
             SignoSeeder::class,
             TratamientoSeeder::class,
+            PruebaLaboratorioSeeder::class,
         ]);
     }
 }
