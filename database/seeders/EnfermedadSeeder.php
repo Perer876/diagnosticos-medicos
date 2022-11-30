@@ -200,24 +200,192 @@ class EnfermedadSeeder extends Seeder
             ])->get(), relationship: 'pruebasLaboratorio')
             ->create();
 
-        /*Enfermedad::factory()
+        Enfermedad::factory()
             ->state([
-                'nombre' => '',
-                'descripcion' => ''
+                'nombre' => 'Tuberculosis pulmonar',
+                'descripcion' => 'La tuberculosis (TB) es una enfermedad bacteriana que generalmente ataca los pulmones. Pero también puede atacar otras partes del cuerpo, incluyendo riñones, la columna vertebral y el cerebro.'
             ])
             ->hasAttached(Sintoma::whereIn('nombre', [
-
+                "Escalofríos", "Fatiga", "Pérdida de apetito", "Dolor en el pecho"
             ])->get())
             ->hasAttached(Signo::whereIn('nombre', [
-
+                "Transpiración nocturna", "Fiebre", "Tos con sangre", "Tos con esputo"
             ])->get())
             ->hasAttached(Tratamiento::whereIn('nombre', [
-
+                "Antibiótico"
             ])->get())
             ->hasAttached(PruebaLaboratorio::whereIn('nombre', [
-
+                "Análisis de sangre", "Prueba de esputo", "Radiografía del torax"
             ])->get(), relationship: 'pruebasLaboratorio')
-            ->create();*/
+            ->create();
+
+        Enfermedad::factory()
+            ->state([
+                'nombre' => 'Neumonía',
+                'descripcion' => 'La neumonía es una infección en uno o ambos pulmones. Causa que los alvéolos pulmonares se llenen de líquido o pus. Puede variar de leve a grave, según el tipo de germen que causa la infección, su edad y su estado general de salud.'
+            ])
+            ->hasAttached(Sintoma::whereIn('nombre', [
+                "Escalofríos", "Náuseas", "Dolor en el pecho"
+            ])->get())
+            ->hasAttached(Signo::whereIn('nombre', [
+                "Tos con esputo", "Fiebre", "Dificultad para respirar", "Vómito", "Diarrea"
+            ])->get())
+            ->hasAttached(Tratamiento::whereIn('nombre', [
+                "Antibiótico", "Oxigenoterapia"
+            ])->get())
+            ->hasAttached(PruebaLaboratorio::whereIn('nombre', [
+                "Análisis de sangre", "Prueba de cultivo de bacterias", "Radiografía del torax", "Prueba de esputo", "Oximetría de pulso", "Broncoscopia"
+            ])->get(), relationship: 'pruebasLaboratorio')
+            ->create();
+
+        Enfermedad::factory()
+            ->state([
+                'nombre' => 'Embolia pulmonar',
+                'descripcion' => 'Es un bloqueo súbito de una arteria pulmonar. Puede ocurrir después de que un coágulo se desprenda y viaje por el torrente sanguíneo hacia los pulmones. '
+            ])
+            ->hasAttached(Sintoma::whereIn('nombre', [
+                "Dolor en el pecho"
+            ])->get())
+            ->hasAttached(Signo::whereIn('nombre', [
+                "Falta de aliento", "Respiración rápida", "Frecuencia cardiaca alta", "Toser sangre", "Presión arterial"
+            ])->get())
+            ->hasAttached(Tratamiento::whereIn('nombre', [
+                "Anticoagulantes", "Trombolíticos", "Trombólisis con asistencia por catéter"
+            ])->get())
+            ->hasAttached(PruebaLaboratorio::whereIn('nombre', [
+                "Angiotomografía computarizada", "Prueba del dímero D", "Examen de isoenzimas de la lactato deshidrogenasa", "Gammagrafía pulmonar de ventilación/perfusión", "Radiografía torácica"
+            ])->get(), relationship: 'pruebasLaboratorio')
+            ->create();
+
+        Enfermedad::factory()
+            ->state([
+                'nombre' => 'Triquinosis',
+                'descripcion' => 'La triquinosis es una enfermedad parasitaria causada por el consumo de carne mal cocida y que contiene quistes (larvas o gusanos inmaduros) de Trichinella spiralis.'
+            ])
+            ->hasAttached(Sintoma::whereIn('nombre', [
+                "Molestia abdominal", "Dolor muscular", "Debilidad muscular"
+            ])->get())
+            ->hasAttached(Signo::whereIn('nombre', [
+                "Diarrea", "Hinchazón facial alrededor de los ojos", "Fiebre"
+            ])->get())
+            ->hasAttached(Tratamiento::whereIn('nombre', [
+                "Albendazol", "Analgésicos"
+            ])->get())
+            ->hasAttached(PruebaLaboratorio::whereIn('nombre', [
+                "Conteo sanguíneo completo", "Conteo de eosinófilos", "Biopsia del músculo"
+            ])->get(), relationship: 'pruebasLaboratorio')
+            ->create();
+
+        Enfermedad::factory()
+            ->state([
+                'nombre' => 'Diabetes',
+                'descripcion' => 'Es una enfermedad en la que los niveles de glucosa (azúcar) de la sangre están muy altos. Con el tiempo, el exceso de glucosa en la sangre puede causar problemas serios. Puede dañar los ojos, los riñones y los nervios. '
+            ])
+            ->hasAttached(Sintoma::whereIn('nombre', [
+                "Fatiga", "Visión borrosa", "Aumento apetito"
+            ])->get())
+            ->hasAttached(Signo::whereIn('nombre', [
+                "Úlceras no cicatrizan", "Perdida de peso"
+            ])->get())
+            ->hasAttached(Tratamiento::whereIn('nombre', [
+                "Plan de alimentación para diabeticos", "Actividad física"
+            ])->get())
+            ->hasAttached(PruebaLaboratorio::whereIn('nombre', [
+                "Análisis de sangre de glucagón", "Examen de anticuerpos antinsulínicos", "Examen de cetonas en la sangre", "Examen de cetonas en orina", "Examen de glucemia"
+            ])->get(), relationship: 'pruebasLaboratorio')
+            ->create();
+
+        Enfermedad::factory()
+            ->state([
+                'nombre' => 'Artritis reactiva',
+                'descripcion' => 'Ocurre cuando su sistema inmunológico reacciona a una infección en otra parte de su cuerpo. Puede hacer que sus articulaciones se inflamen y duelan, similar a los síntomas de la artritis. También puede afectar sus ojos y genitales'
+            ])
+            ->hasAttached(Sintoma::whereIn('nombre', [
+                "Dolor en articulaciones", "Dolor de estomago", "Dolor en el talón"
+            ])->get())
+            ->hasAttached(Signo::whereIn('nombre', [
+                "Hinchazón en articulaciones", "Enrojecimiento en articulaciones", "Fiebre", "Diarrea", "Llagas en la piel", "Úlceras en la boca"
+            ])->get())
+            ->hasAttached(Tratamiento::whereIn('nombre', [
+                "Antiinflamatorios no esteroides"
+            ])->get())
+            ->hasAttached(PruebaLaboratorio::whereIn('nombre', [
+                "Análisis de orina"
+            ])->get(), relationship: 'pruebasLaboratorio')
+            ->create();
+
+        Enfermedad::factory()
+            ->state([
+                'nombre' => 'Dengue',
+                'descripcion' => 'El dengue es una infección causada por un virus. Usted puede infectarse si un mosquito infectado lo pica. El dengue no se transmite de persona a persona.'
+            ])
+            ->hasAttached(Sintoma::whereIn('nombre', [
+                "Dolor en articulaciones", "Dolor muscular", "Dolor de cabeza"
+            ])->get())
+            ->hasAttached(Signo::whereIn('nombre', [
+                "Sangrado en la naríz", "Sangrado en las encías", "Fiebre", "Vómito", "Sarpullido"
+            ])->get())
+            ->hasAttached(Tratamiento::whereIn('nombre', [
+                "Acetaminofén", "Descansar"
+            ])->get())
+            ->hasAttached(PruebaLaboratorio::whereIn('nombre', [
+                "Análisis de sangre"
+            ])->get(), relationship: 'pruebasLaboratorio')
+            ->create();
+
+        Enfermedad::factory()
+            ->state([
+                'nombre' => 'Fibromialgia',
+                'descripcion' => 'Es una afección crónica que causa dolor en todo el cuerpo, fatiga y otros síntomas. Las personas con fibromialgia pueden ser más sensibles al dolor que aquellas que no la tienen. Esto se conoce como percepción anormal del dolor.'
+            ])
+            ->hasAttached(Sintoma::whereIn('nombre', [
+                "Dolor corporal", "Fatiga", "Dolor de cabeza", "Dificultad para dormir"
+            ])->get())
+            ->hasAttached(Signo::whereIn('nombre', [
+                "Depresión", "Ansiedad", "Síndrome del intestino irritable"
+            ])->get())
+            ->hasAttached(Tratamiento::whereIn('nombre', [
+                "Analgésicos", "Antidepresivos", "Terapia conversacional"
+            ])->get())
+            ->create();
+
+        Enfermedad::factory()
+            ->state([
+                'nombre' => 'Hepatitis viral',
+                'descripcion' => 'La hepatitis es la inflamación del hígado. Inflamación es la hinchazón de órganos que ocurren cuando se lesionan o infectan, y puede dañar su hígado. La hinchazón y daño puede afectar el buen funcionamiento de este órgano.'
+            ])
+            ->hasAttached(Sintoma::whereIn('nombre', [
+                "Fatiga", "Pérdida de apetito", "Náusea", "Dolor abdominal", "Dolor en articulaciones"
+            ])->get())
+            ->hasAttached(Signo::whereIn('nombre', [
+                "Fiebre", "Vómito", "Orina oscura", "Heces de color arcilla", "Ictericia"
+            ])->get())
+            ->hasAttached(Tratamiento::whereIn('nombre', [
+                "Descansar", "Transplante de hígado"
+            ])->get())
+            ->hasAttached(PruebaLaboratorio::whereIn('nombre', [
+                "Ecografía", "Resonancia magnética", "Tomografía computarizada", "Biopsia de hígado", "Análisis de sangre"
+            ])->get(), relationship: 'pruebasLaboratorio')
+            ->create();
+
+        Enfermedad::factory()
+            ->state([
+                'nombre' => 'Conjuntivitis',
+                'descripcion' => 'Causa hinchazón, picazón, ardor, lagrimeo y enrojecimiento de la conjuntiva, la membrana delgada y translúcida que recubre la parte blanca del ojo y el interior de los párpados'
+            ])
+            ->hasAttached(Sintoma::whereIn('nombre', [
+                "Picazon ojos"
+            ])->get())
+            ->hasAttached(Signo::whereIn('nombre', [
+                "Quemosis", "Secreciones ojos", "Lagrimeo"
+            ])->get())
+            ->hasAttached(Tratamiento::whereIn('nombre', [
+                "Antibióticos para la conjuntivitis"
+            ])->get())
+            ->hasAttached(PruebaLaboratorio::whereIn('nombre', [
+                "Cultivo de bacterias"
+            ])->get(), relationship: 'pruebasLaboratorio')
+            ->create();
 
     }
 }

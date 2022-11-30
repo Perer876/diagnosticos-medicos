@@ -21,7 +21,7 @@ class EnfermedadController extends Controller
      */
     public function index()
     {
-        $enfermedades = Enfermedad::all();
+        $enfermedades = Enfermedad::orderBy('nombre')->get();
         return view('enfermedades.enfermedades-index', compact('enfermedades'));
     }
 
@@ -45,7 +45,7 @@ class EnfermedadController extends Controller
     {
         $enfermedadData = $request->safe()->only(['nombre', 'descripcion']);
         Enfermedad::create($enfermedadData);
-        
+
         return redirect()->route('enfermedades.index');
     }
 
