@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\InferenceEngines\Enfermedades\EnfermedadEngine;
+use App\Utilities\Logic\Contraptions\Variable;
 use App\Http\Requests\{StoreCitaEvaluacionRequest, StoreCitaRequest, UpdateCitaRequest};
-use App\Models\{Cita, EstadoCita, Evaluacion, Paciente};
+use App\Models\{Cita, Enfermedad, EstadoCita, Evaluacion, Paciente};
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
+use App\InferenceEngines\Enfermedades\Relations\Enfermedad as FactEnfermedad;
 
 class CitaController extends Controller
 {
@@ -131,6 +134,25 @@ class CitaController extends Controller
         ]);
         $evaluacion->sintomas()->sync($request->input('sintomas', []));
         $evaluacion->signos()->sync($request->input('signos', []));
+        $evaluacion->refresh();
+
+        $ie = new EnfermedadEngine;
+
+        foreach ($evaluacion->signos as $signo) {
+            $ie->assert($signo->fact);
+        }
+
+        foreach ($evaluacion->sintomas as $sintoma) {
+            $ie->assert($sintoma->fact);
+        }
+
+        $res = $ie->query(FactEnfermedad::is(new Variable));
+        if ($res->current() !== null) {
+            $evaluacion->enfermedad()->associate(
+                Enfermedad::where('nombre', $res->current()->value[0])->first()
+            );
+            $evaluacion->save();
+        }
 
         return to_route('citas.evaluacion.show', [$cita, $evaluacion]);
     }
@@ -149,6 +171,27 @@ class CitaController extends Controller
     {
         $evaluacion->sintomas()->sync($request->input('sintomas', []));
         $evaluacion->signos()->sync($request->input('signos', []));
+        $evaluacion->refresh();
+
+        $ie = new EnfermedadEngine;
+
+        foreach ($evaluacion->signos as $signo) {
+            $ie->assert($signo->fact);
+        }
+
+        foreach ($evaluacion->sintomas as $sintoma) {
+            $ie->assert($sintoma->fact);
+        }
+
+        $res = $ie->query(FactEnfermedad::is(new Variable));
+        if ($res->current() !== null) {
+            $evaluacion->enfermedad()->associate(
+                Enfermedad::where('nombre', $res->current()->value[0])->first()
+            );
+        } else {
+            $evaluacion->enfermedad()->disassociate();
+        }
+        $evaluacion->save();
 
         return to_route('citas.evaluacion.show', [$cita, $evaluacion]);
     }
